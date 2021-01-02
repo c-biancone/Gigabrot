@@ -103,7 +103,7 @@ To view the output `.ppm` files:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1. In `stripedMan.c`, modify the `iXmax` and `iYmax` (Resolution) and `IterationMax` parameters to the desired values.
+1. In `stripedMan.c`, modify the `iXmax` and `iYmax` (Resolution) and `iterationMax` parameters to the desired values.
 
 2. Build and run the project in CLion.
 
