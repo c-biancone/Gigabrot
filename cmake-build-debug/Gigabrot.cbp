@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/cygdrive/c/Users/Chris/Documents/Gigabrot/stripedMan.c">
+		<Unit filename="/cygdrive/c/Users/Chris/Documents/Gigabrot/parallelStripedMan.c">
 			<Option target="Gigabrot"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Chris/Documents/Gigabrot/CMakeLists.txt">
