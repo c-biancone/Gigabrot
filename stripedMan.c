@@ -9,10 +9,10 @@
 
 // image size
 int iX, iY;
-const int iXmax = 500;
-const int iYmax = 500; // for main antenna
+const int iXmax = 1000;
+const int iYmax = 1000; // for main antenna
 
-const int iterationMax = 256;
+const int iterationMax = 1000;
 
 
 // coordinate plane to be rendered
@@ -98,9 +98,24 @@ int colorize(double _Complex c, unsigned char *color, int iMax) {
         Z = Z * Z + c;
 
         if (i>i_skip) A += getT(Z);
+
         R = cabs(Z);
 
-        if (cabs(Z) > escapeRadius) { // exterior of M set
+        // shape checking algorithm
+        // skips iterating points within the main cardioid and secondary bulb, otherwise these
+        // would all hit the max iterations
+        // removes about 91% of the set from iteration
+        // REMOVE THIS IF NOT RENDERING THE ENTIRE SET - more computation per iteration if the main
+        // cardioid and secondary bulb are not shown onscreen
+        double q = ((creal(c) - 0.25) * (creal(c) - 0.25)) + (cimag(c) * cimag(c));
+        double cardioid = 0.25 * cimag(c) * cimag(c);
+        double bulb = 0.0625;
+        if ((creal(c) * creal(c) + 2 * creal(c) + 1 + cimag(c) * cimag(c)) < bulb || (q * (q + (creal(c) - 0.25)) < cardioid)) {
+            break;
+        }
+
+
+        if (R > escapeRadius) { // exterior of M set
             u = Z / dC;
             u = u / cabs(u);
             reflection = cdot(u, v) + h2;
@@ -114,7 +129,7 @@ int colorize(double _Complex c, unsigned char *color, int iMax) {
         A = -1.0; // interior
     else { // exterior
         de = 2 * R * log(R) / cabs(dC);
-        if (de < pixelWidth) A = FP_ZERO; //  boundary
+        if (de < (pixelWidth/3)) A = FP_ZERO; //  boundary
         else {
             // computing interpolated average
             A /= (i - i_skip) ; // A(n)
