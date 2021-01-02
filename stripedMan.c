@@ -10,7 +10,7 @@
 // image size
 int iX, iY;
 const int iXmax = 500;
-const int iYmax = 501; // for main antenna
+const int iYmax = 500; // for main antenna
 
 const int IterationMax = 256;
 
@@ -41,7 +41,7 @@ int i_skip = 1; // exclude (i_skip+1) elements from average
 const double EscapeRadius = 1000000; // big !!!!
 double lnER; // ln(ER)
 
-double _Complex give_c(int iX, int iY) {
+double _Complex giveC(int iX, int iY) {
     double Cx, Cy;
     Cy = CyMax - iY * PixelHeight;
     //if (fabs(Cy)< PixelHeight/3.0) Cy=0.0; // main antenna
@@ -120,7 +120,7 @@ double Give_Arg(double _Complex C , int iMax)
         dC = 2 * Z * dC + 1;
         Z=Z*Z+C; // the Mandelbrot sauce
 
-        if (i>i_skip) A += Give_t(Z);
+        if (i>i_skip) A += getT(Z);
 
         R = cabs(Z);
         if(R > EscapeRadius) break; // exterior of M set
@@ -155,7 +155,7 @@ double arg;
 unsigned char b;
 
 // compute
-reflection = GiveReflection(c, IterationMax);
+reflection = getReflection(c, IterationMax);
 arg = Give_Arg(c, IterationMax);
 
 if (reflection == FP_ZERO) { // interior of Mandelbrot set = inside_color = black
@@ -229,7 +229,7 @@ int main() {
     for (iY = 0; iY < iYmax; iY++)
         for (iX = 0; iX < iXmax; iX++) {
             // compute pixel coordinate
-            c = give_c(iX, iY);
+            c = giveC(iX, iY);
             // compute  pixel color (24 bit = 3 bytes)
             compute_color(c, color);
             // write color to the file
