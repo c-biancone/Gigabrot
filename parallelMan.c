@@ -49,7 +49,7 @@ int main()
                 double Zy2=Zy*Zy;
                 /* */
                 int Iteration;
-                const int IterationMax=50;
+                const int IterationMax=1000;
                 const double Bailout=2; // bail-out value
                 const double Circle_Radius=Bailout*Bailout; // circle radius
 

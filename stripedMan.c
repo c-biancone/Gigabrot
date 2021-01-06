@@ -1,22 +1,22 @@
 #include <stdio.h>
 #include <math.h>
 #include <complex.h>
-#include <time.h>
+#include <sys/time.h>
 #include <omp.h>
+#include <windows.h>
 
 #define M_PI 3.14159265358979323846 /* pi */
 
 
 // image size
 int iX, iY;
-const int iXmax = 1000;
-const int iYmax = 1000; // for main antenna
+const int iXmax = 500;
+const int iYmax = 500; // for main antenna
 
 const int iterationMax = 1000;
 
 
 // coordinate plane to be rendered
-double Cx, Cy;
 const double CxMin = -2.2;
 const double CxMax = 0.8;
 const double CyMin = -1.5;
@@ -24,17 +24,15 @@ const double CyMax = 1.5;
 
 double pixelWidth; //=(CxMax-CxMin)/iXmax;
 double pixelHeight; // =(CyMax-CyMin)/iYmax;
-
 // rgb - SDR colorspace (8 bits per color)
 const int maxColorComponentValue = 255;
 FILE * fp;
-char * filename = "mandelbrot.ppm"; // https://www.math.univ-toulouse.fr/~cheritat/wiki-draw/index
+char * filename = "mandelbrot.ppm";
 
 // char * comment = "# "; // comment should start with #
 
 static unsigned char color[3]; // 24-bit rgb color
 unsigned char s = 7; // stripe density
-
 int i_skip = 1; // exclude (i_skip+1) elements from average
 // bail-out value for the bailout test for escaping points radius of circle centered at the
 // origin, exterior of such circle is a target set
@@ -46,7 +44,6 @@ double _Complex giveC(int iX, int iY) {
     Cy = CyMax - iY * pixelHeight;
     //if (fabs(Cy)< pixelHeight/3.0) Cy=0.0; // main antenna
     Cx = CxMin + iX * pixelWidth;
-
     return Cx + Cy * I;
 }
 
@@ -54,7 +51,7 @@ double _Complex giveC(int iX, int iY) {
  The dot product of two vectors a = [a1, a2, ..., an] and b = [b1, b2, ..., bn] is defined as:[1]
  d = a1b1 + a2b2
 */
-double cdot(double _Complex a, double _Complex b) {
+double cDot(double _Complex a, double _Complex b) {
     return creal(a) * creal(b) + cimag(a) * cimag(b);
 }
 
@@ -62,9 +59,7 @@ double cdot(double _Complex a, double _Complex b) {
 // input : complex number z
 // output : double number t
 double getT(double _Complex z){
-
     return 0.5+0.5*sin(s*carg(z));
-
 }
 
 
@@ -118,7 +113,7 @@ int colorize(double _Complex c, unsigned char *color, int iMax) {
         if (R > escapeRadius) { // exterior of M set
             u = Z / dC;
             u = u / cabs(u);
-            reflection = cdot(u, v) + h2;
+            reflection = cDot(u, v) + h2;
             reflection = reflection / (1.0 + h2); // rescale so that t does not get bigger than 1
             if (reflection < 0.0) reflection = 0.0;
             break;
@@ -129,7 +124,8 @@ int colorize(double _Complex c, unsigned char *color, int iMax) {
         A = -1.0; // interior
     else { // exterior
         de = 2 * R * log(R) / cabs(dC);
-        if (de < (pixelWidth/3)) A = FP_ZERO; //  boundary
+        int thin = 3; // thinness of the border
+        if (de < (pixelWidth / thin)) A = FP_ZERO; //  boundary
         else {
             // computing interpolated average
             A /= (i - i_skip) ; // A(n)
@@ -200,19 +196,26 @@ void close() {
     info();
 }
 
+void writePixel() {
+    size_t pix = 3;
+}
+
 // ************************************* main *************************
 int main() {
-    double execTime = 0.0;
-    clock_t begin = clock();
+
+    struct timeval begin, end;
+    gettimeofday(&begin, 0);
 
     double _Complex c;
 
     setup();
 
     printf(" render = compute and write image data bytes to the file \n");
-#pragma omp parallel for schedule(dynamic)
+
     for (iY = 0; iY < iYmax; iY++)
-        for (iX = 0; iX < iXmax; iX++) {
+    {
+        for (iX = 0; iX < iXmax; iX++)
+        {
             // compute pixel coordinate
             c = giveC(iX, iY);
             // compute  pixel color (24 bit = 3 bytes)
@@ -220,11 +223,14 @@ int main() {
             // write color to the file
             fwrite(color, 1, 3, fp);
         }
+    }
 
     close();
 
-    clock_t end = clock();
-    execTime += (double)(end - begin) / CLOCKS_PER_SEC;
+    gettimeofday(&end, 0);
+    long seconds = end.tv_sec - begin.tv_sec;
+    long microseconds = end.tv_usec - begin.tv_usec;
+    double execTime = seconds + microseconds*1e-6;
     printf("Time elapsed: %f seconds", execTime);
 
     return 0;
