@@ -12,9 +12,9 @@
 
 
 // image size
-int iX, iY;
-const int iXmax = 500; // 2 billion+ px each side should be enough resolution right???????
-const int iYmax = 500; // for main antenna
+int pX, pY;
+const int pXmax = 5000; // 2 billion+ px each side should be enough resolution right???????
+const int pYmax = 5000; // for main antenna
 
 const int iterationMax = 1000;
 
@@ -25,8 +25,8 @@ const double CxMax = 0.8;
 const double CyMin = -1.5;
 const double CyMax = 1.5;
 
-double pixelWidth; //=(CxMax-CxMin)/iXmax;
-double pixelHeight; // =(CyMax-CyMin)/iYmax;
+double pixelWidth; //=(CxMax-CxMin)/pXmax;
+double pixelHeight; // =(CyMax-CyMin)/pYmax;
 // rgb - SDR colorspace (8 bits per color)
 const int maxColorComponentValue = 255;
 FILE * fp;
@@ -178,20 +178,20 @@ int colorize(double _Complex c, unsigned char *row, int iX, int iMax) {
 
 
 void setup() {
-    pixelWidth = (CxMax - CxMin) / iXmax;
-    pixelHeight = (CyMax - CyMin) / iYmax;
+    pixelWidth = (CxMax - CxMin) / pXmax;
+    pixelHeight = (CyMax - CyMin) / pYmax;
 
     lnER = log(escapeRadius);
 
     // create new ppm6 file, give it a name, and open it in binary mode
     fp = fopen(filename, "wb");
     // write ASCII header to the file
-    fprintf(fp, "P6\n %d\n %d\n %d\n", iXmax, iYmax, maxColorComponentValue);
+    fprintf(fp, "P6\n %d\n %d\n %d\n", pXmax, pYmax, maxColorComponentValue);
 
 
     /*
-    unsigned char buf[HEADER_LEN + 3UL * iXmax * iYmax];
-    sprintf((char *)buf, "P6 %d %d %d\n", iXmax, iYmax, maxColorComponentValue);
+    unsigned char buf[HEADER_LEN + 3UL * pXmax * pYmax];
+    sprintf((char *)buf, "P6 %d %d %d\n", pXmax, pYmax, maxColorComponentValue);
     unsigned char *p = buf + HEADER_LEN; */
 }
 
@@ -199,7 +199,7 @@ void info() {
 
     double distortion;
     // width/height
-    double pixelsAspectRatio = (double) iXmax / iYmax;
+    double pixelsAspectRatio = (double) pXmax / pYmax;
     double worldAspectRatio = (CxMax - CxMin) / (CyMax - CyMin);
     printf("pixelsAspectRatio = %.16f \n", pixelsAspectRatio);
     printf("worldAspectRatio = %.16f \n", worldAspectRatio);
@@ -226,26 +226,26 @@ int main() {
     double _Complex c;
 
     // int pixels = 5000 * 3;
-    unsigned char row[iXmax * 3];
+    unsigned char row[pXmax * 3];
 
     // typedef unsigned char pixel_t[3]; // array for the rgb values of each pixel in one row
     // allocate enough space in memory to hold the rgb values of one row of the image
-    // pixel_t *pixels = malloc(sizeof(pixel_t) * iXmax);
+    // pixel_t *pixels = malloc(sizeof(pixel_t) * pXmax);
 
     setup();
 
     printf(" render = compute and write image data bytes to the file \n");
 
 
-    for (iY = 0; iY < iYmax; iY++)
+    for (pY = 0; pY < pYmax; pY++)
     {
 #pragma omp parallel for schedule(dynamic)
-        for (iX = 0; iX < iXmax; iX++)
+        for (pX = 0; pX < pXmax; pX++)
         {
             // compute pixel coordinate
-            c = giveC(iX, iY);
+            c = giveC(pX, pY);
             // compute  pixel color (24 bit = 3 bytes)
-            colorize(c, row, iX, iterationMax);
+            colorize(c, row, pX, iterationMax);
             // write color to the file
             //fwrite(color, 1, 3, fp);
         }

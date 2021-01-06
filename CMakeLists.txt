@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 project(Gigabrot)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffast-math")
 
 find_package(OpenMP REQUIRED)
 if (OPENMP_FOUND)
