@@ -68,7 +68,7 @@ double getT(double _Complex z){
 
 
 
-int colorize(double _Complex c, unsigned char **row, int iX, int iMax) {
+int colorize(double _Complex c, unsigned char *row, int iX, int iMax) {
 
     // global
     unsigned char b; // color
@@ -143,7 +143,7 @@ int colorize(double _Complex c, unsigned char **row, int iX, int iMax) {
     }
 
 // assign
-    //int subPixel = iX;
+    int subPixel = 3 * iX;
     if (reflection == FP_ZERO) { // interior of Mandelbrot set = inside_color = black
         /*color[0] = 0;
         color[1] = 0;
@@ -151,9 +151,9 @@ int colorize(double _Complex c, unsigned char **row, int iX, int iMax) {
         // ppm files have pixels situated as groups of 3 ASCII chars in a row; the columns of the image file will be 3x as numerous as the rows
         // attempting to store the image rows as a vector in memory and write to the file 1 row
         // at a time
-        row[iX][0] = 0;
-        row[iX][1] = 0;
-        row[iX][2] = 0;
+        row[subPixel] = 0;
+        row[subPixel+1] = 0;
+        row[subPixel+2] = 0;
     }
 
         // exterior of Mandelbrot set = normal
@@ -168,9 +168,9 @@ int colorize(double _Complex c, unsigned char **row, int iX, int iMax) {
         //color[1] = b; // Green
         //color[2] = b; // Blue
 
-        row[iX][0] = b;
-        row[iX][1] = b;
-        row[iX][2] = b;
+        row[subPixel] = b;
+        row[subPixel+1] = b;
+        row[subPixel+2] = b;
     }
     return 0;
 }
@@ -226,7 +226,7 @@ int main() {
     double _Complex c;
 
     // int pixels = 5000 * 3;
-    unsigned char row[iXmax][3];
+    unsigned char row[iXmax * 3];
 
     // typedef unsigned char pixel_t[3]; // array for the rgb values of each pixel in one row
     // allocate enough space in memory to hold the rgb values of one row of the image
@@ -239,18 +239,18 @@ int main() {
 
     for (iY = 0; iY < iYmax; iY++)
     {
-#pragma omp parallel for schedule(dynamic,1)
+#pragma omp parallel for schedule(dynamic)
         for (iX = 0; iX < iXmax; iX++)
         {
             // compute pixel coordinate
             c = giveC(iX, iY);
             // compute  pixel color (24 bit = 3 bytes)
-            colorize(c, (unsigned char *)row, iX, iterationMax);
+            colorize(c, row, iX, iterationMax);
             // write color to the file
             //fwrite(color, 1, 3, fp);
         }
         // write the cached row of pixels
-        fwrite(row, 1, sizeof(row), fp);
+        fwrite(row, 1, (size_t)sizeof(row), fp);
         //fwrite("\n", 1, 1, fp);
     }
 

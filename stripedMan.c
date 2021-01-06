@@ -27,7 +27,7 @@ double pixelHeight; // =(CyMax-CyMin)/iYmax;
 // rgb - SDR colorspace (8 bits per color)
 const int maxColorComponentValue = 255;
 FILE * fp;
-char * filename = "mandelbrot.ppm";
+char * filename = "mandelbrotREFERENCE.ppm";
 
 // char * comment = "# "; // comment should start with #
 
