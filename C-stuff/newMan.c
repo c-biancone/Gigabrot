@@ -13,8 +13,8 @@
 
 // image size
 int pX, pY;
-const int pXmax = 5000; // 2 billion+ px each side should be enough resolution right???????
-const int pYmax = 5000; // for main antenna
+const int pXmax = 500; // 2 billion+ px each side should be enough resolution right???????
+const int pYmax = 500; // for main antenna
 
 const int iterationMax = 1000;
 
@@ -201,13 +201,13 @@ void info() {
     // width/height
     double pixelsAspectRatio = (double) pXmax / pYmax;
     double worldAspectRatio = (CxMax - CxMin) / (CyMax - CyMin);
-    printf("pixelsAspectRatio = %.16f \n", pixelsAspectRatio);
-    printf("worldAspectRatio = %.16f \n", worldAspectRatio);
+    // printf("pixelsAspectRatio = %.16f \n", pixelsAspectRatio);
+    // printf("worldAspectRatio = %.16f \n", worldAspectRatio);
     distortion = pixelsAspectRatio - worldAspectRatio;
-    printf("distortion = %.16f ( it should be zero !)\n", distortion);
-    //printf("bailout value = Escape Radius = %.0f \n", escapeRadius);
-    //printf("iterationMax = %d \n", iterationMax);
-    //printf("i_skip = %d = number of skipped elements ( including t0 )= %d \n", i_skip, i_skip+1);
+    printf("distortion = %.16f (should be zero!)\n", distortion);
+    // printf("bailout value = Escape Radius = %.0f \n", escapeRadius);
+    // printf("iterationMax = %d \n", iterationMax);
+    // printf("i_skip = %d = number of skipped elements ( including t0 )= %d \n", i_skip, i_skip+1);
     printf("file %s saved.\n", filename);
 
 }
@@ -234,7 +234,7 @@ int main() {
 
     setup();
 
-    printf(" render = compute and write image data bytes to the file \n");
+    printf("Rendering row by row:\n");
 
 
     for (pY = 0; pY < pYmax; pY++)
@@ -246,12 +246,10 @@ int main() {
             c = giveC(pX, pY);
             // compute  pixel color (24 bit = 3 bytes)
             colorize(c, row, pX, iterationMax);
-            // write color to the file
-            //fwrite(color, 1, 3, fp);
         }
         // write the cached row of pixels
         fwrite(row, 1, (size_t)sizeof(row), fp);
-        //fwrite("\n", 1, 1, fp);
+        //fwrite("\n", 1, 1, fp); // unnecessary
     }
 
     close();
