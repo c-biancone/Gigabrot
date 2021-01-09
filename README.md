@@ -67,9 +67,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a _work in progress_ to allow me to practive coding in a realm that I have not been able to do before, while simultaneously exploring an area that intrigues me as a numberphile. I am most comfortable with `C`, so I have begun there and am going to explore the usage of things such as `SIMD` and `AVX` instructions, loop unraveling, and any other optimizations that I can to improve the efficency. With that, I will attempt to translate the same level of functionality to Python, which is a language I hope to become more familiar with using. Due to Python's slowness, I will use the Numpy library. Eventually, I would like to be able to write this in `CUDA` so I can run the iteration task as the kernal and parrallelize the operations even more, so that multiple-gigapixel images become feasible.
+This is a _work in progress_ to allow me to practive coding in a realm that I have not been able to do before, while simultaneously exploring an area that intrigues me as a numberphile. I am most comfortable with `C`, so I have begun there and am going to explore the usage of things such as `SIMD` and `AVX` instructions, loop unraveling, and any other optimizations that I can to improve the efficency. With that, I will attempt to translate the same level of functionality to `Python`, which is a language I hope to become more familiar with using. Due to Python's slowness, I will use the `Numpy` library. Eventually, I would like to be able to write this in `CUDA` so I can run the iteration task as the kernal and parrallelize the operations even more, so that multiple-gigapixel images become feasible.
       
 I chose the Mandelbrot set originally not for its simplicity to generate with code, but because I am fascianted with its connections to the Fibonacci Sequence and Logistic Map, and how each of those is delicately itertwined with nature. **Math is beautiful and scary.**
+
+### Update 01-09-2021
+
+I have achieved pretty much the functionality and performance I originally wanted to with basic `C` so far, with a little `OpenMP` thrown in for parallel computing on the CPU. There was a point where I thought I might have to use POSIX file manipulation but I am glad to have avoided that for the sake of portability. With that, I am looking into trying to use `OpenCL` to run the ebarassingly parallel loop in as many threads as possible on the GPU, while having the CPU do the sequential logic of file manipulation. I'm prioritizing this over CUDA because the portability will be more useful than complete optimization for an NVidia GPU. Theoretically this could queue more threads in the GPU than there are pixels per row of the image, the only trouble being memory latency and having to share memory bandwidth if the CPU is to write the data to the file. While `OpenCL` is based on C, CLion does not have native support so I have to do manual configuration now :/.
+
+Since the overall speed doesn't matter too much to me - I can let my PC chew on this for a while if I want to make a big canvas print or something, and this code is easy for me to follow - the speed of the eventual `Python` implementation should also be fine. I'm not going to edit the `Assembly` output searching for every millisecond savings. Trying `OpenCL` now is mainly because I am in a groove with `C`.
+
 
 
 ### Built With
