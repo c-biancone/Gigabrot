@@ -13,7 +13,7 @@ const int pYmax = 500; // for main antenna
 const int iterationMax = 1000;
 /**************************************************************************************************/
 
-/***************************** coordinate plane to be rendered ************************************/
+/****************************** coordinate plane to be rendered ***********************************/
 const double CxMin = -2.2;
 const double CxMax = 0.8;
 const double CyMin = -1.5;
@@ -138,7 +138,8 @@ int colorize(double _Complex c, unsigned char *row, int iX, int iMax) {
         double q = ((creal(c) - 0.25) * (creal(c) - 0.25)) + (cimag(c) * cimag(c));
         double cardioid = 0.25 * cimag(c) * cimag(c);
         double bulb = 0.0625;
-        if ((creal(c) * creal(c) + 2 * creal(c) + 1 + cimag(c) * cimag(c)) < bulb || (q * (q + (creal(c) - 0.25)) < cardioid)) {
+        if ((creal(c) * creal(c) + 2 * creal(c) + 1 + cimag(c) * cimag(c)) < bulb || (q * (q +
+        (creal(c) - 0.25)) < cardioid)) {
             break;
         }
         /** get normal map **/
