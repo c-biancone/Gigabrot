@@ -12,8 +12,7 @@ if (OPENMP_FOUND)
 endif()
 
 add_executable(Gigabrot
-        #stripedMan.c)
-        newMan.c)
-        #parallelMan.c)
+        #originalStriped.c)
+        parallelStriped.c)
 
 target_link_libraries(Gigabrot PUBLIC OpenMP::OpenMP_CXX)

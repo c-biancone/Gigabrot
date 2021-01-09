@@ -51,7 +51,7 @@ double _Complex giveC(int iX, int iY) {
  The dot product of two vectors a = [a1, a2, ..., an] and b = [b1, b2, ..., bn] is defined as:[1]
  d = a1b1 + a2b2
 */
-double cDot(double _Complex a, double _Complex b) {
+double c_dot(double _Complex a, double _Complex b) {
     return creal(a) * creal(b) + cimag(a) * cimag(b);
 }
 
