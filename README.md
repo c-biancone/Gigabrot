@@ -89,12 +89,13 @@ Since the overall speed doesn't matter too much to me - I can let my PC chew on 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+To get a local copy up and running follow these simple steps:
 
 ### Prerequisites
 
 To view the output `.ppm` files:
 * [Netpbm Viewer](http://paulcuth.me.uk/netpbm-viewer/)
+* [NVidia](https://developer.nvidia.com/opencl) / [Intel](https://software.intel.com/content/www/us/en/develop/tools/opencl-sdk.html) OpenCL Library (it seems that AMD removed theirs from their servers??) I hate how little documentation there is for OpenCL :(
   
 **Others N/A (Just yet)**
 
