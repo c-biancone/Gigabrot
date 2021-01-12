@@ -77,6 +77,10 @@ I have achieved pretty much the functionality and performance I originally wante
 
 Since the overall speed doesn't matter too much to me - I can let my PC chew on this for a while if I want to make a big canvas print or something, and this code is easy for me to follow - the speed of the eventual `Python` implementation should also be fine. I'm not going to edit the `Assembly` output searching for every millisecond savings. Trying `OpenCL` now is mainly because I am in a groove with `C`.
 
+### Update 01-11-2021
+
+Alright so `CMake` hates `OpenCL`. No matter what I try it will detect that I have the library installed as part of the `CUDA` SDK but will not link the library. My goal is to experiment with new coding principles, not fight with compiler scripting languages, so I may just try to write the GPU code in `CUDA`; I already have the `C` code which is portable enough, right? Theoreticaly the CUDA will be better optimized since I was not going to do much manual optimization of the OpenCL code anyway. Oh well, I will come back to this if I get the chance since I think it is still important.
+
 
 
 ### Built With
@@ -89,12 +93,13 @@ Since the overall speed doesn't matter too much to me - I can let my PC chew on 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+To get a local copy up and running follow these simple steps:
 
 ### Prerequisites
 
 To view the output `.ppm` files:
 * [Netpbm Viewer](http://paulcuth.me.uk/netpbm-viewer/)
+* [NVidia](https://developer.nvidia.com/opencl) / [Intel](https://software.intel.com/content/www/us/en/develop/tools/opencl-sdk.html) OpenCL Library (it seems that AMD removed theirs from their servers??) I hate how little documentation there is for OpenCL :(
   
 **Others N/A (Just yet)**
 
