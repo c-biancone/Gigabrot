@@ -8,8 +8,8 @@
 
 /************************************* image variables ********************************************/
 int pX, pY;
-const int pXmax = 500; // 2 billion+ px each side should be enough resolution right???????
-const int pYmax = 500; // for main antenna
+const int pXmax = 1280; // 2 billion+ px each side should be enough resolution right???????
+const int pYmax = 1280; // for main antenna
 const int iterationMax = 1000;
 /**************************************************************************************************/
 
