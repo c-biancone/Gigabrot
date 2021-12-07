@@ -15,7 +15,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/pinecone19/Gigabrot">
-    <img src="images/5000x5000.png" alt="Logo" width="800" height="800">
+    <img src="output/5000x5000.png" alt="Logo" width="800" height="800">
   </a>
 
   <h3 align="center">Gigabrot</h3>

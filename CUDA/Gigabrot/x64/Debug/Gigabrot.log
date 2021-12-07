@@ -1,0 +1,48 @@
+﻿  Compiling CUDA source file kernel.cu...
+  
+  C:\Users\Chris\Documents\Gigabrot\CUDA-stuff\Gigabrot>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\Users\Chris\Documents\Gigabrot\CUDA-stuff\Gigabrot\kernel.cu" 
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(48): warning : conversion from a string literal to "char *" is deprecated
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(120): warning : expression has no effect
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(116): warning : variable "Cx" was set but never used
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(270): warning : a host variable "i_skip" cannot be directly read in a device function
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(302): warning : a host variable "pixelWidth" cannot be directly read in a device function
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(305): warning : a host variable "i_skip" cannot be directly read in a device function
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(306): warning : a host variable "i_skip" cannot be directly read in a device function
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(308): warning : a host variable "lnER" cannot be directly read in a device function
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(349): error : expected a "("
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): warning : parsing restarts here after previous syntax error
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): error : expected an expression
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): error : expected a ";"
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): error : expected an expression
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): error : expected a ";"
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): error : expected an expression
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): error : expected a ")"
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(352): error : expected a statement
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(356): warning : invalid format string conversion
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(342): warning : variable "row" was declared but never referenced
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(372): error : function "main" has already been defined
+  
+C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu(32): warning : variable "iterationMax" was declared but never referenced
+  
+  9 errors detected in the compilation of "C:/Users/Chris/Documents/Gigabrot/CUDA-stuff/Gigabrot/kernel.cu".
+  kernel.cu
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\CUDA 11.2.targets(785,9): error MSB3721: The command ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\Users\Chris\Documents\Gigabrot\CUDA-stuff\Gigabrot\kernel.cu"" exited with code 1.

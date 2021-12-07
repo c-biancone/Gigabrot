@@ -1,0 +1,2 @@
+C:\Users\Chris\Documents\Gigabrot\CUDA-stuff\Gigabrot\x64\Debug\Gigabrot.exe
+C:\Users\Chris\Documents\Gigabrot\CUDA-stuff\Gigabrot\x64\Debug\Gigabrot.pdb
