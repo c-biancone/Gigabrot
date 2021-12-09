@@ -92,6 +92,30 @@ double getT(complex<double> z){
 }
 
 /**
+ * Shape checking algorithm - determines if point is within main cardioid or secondary bulb
+ * Removes about 91% of the set from being iterated
+ * Should not be implemented for a render that does not include these parts, will add unnecessary
+ * computing
+ * @param c - complex number location
+ * @param color - pixel value
+ * @return TRUE if within the main shapes
+ */
+bool shape_check(complex<double> c, unsigned char color)
+{
+    double q = ((real(c) - 0.25) * (real(c) - 0.25)) + (imag(c) * imag(c));
+    double cardioid = 0.25 * imag(c) * imag(c);
+    double bulb = 0.0625;
+    if ((real(c) * real(c) + 2 * real(c) + 1 + imag(c) * imag(c)) < bulb ||
+        (q * (q +(real(c) - 0.25)) < cardioid))
+    {
+        color = 0; // black
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * Function: colorize
  * ------------------
  * The bread and butter of this program; determines if point is within set by escape-time
@@ -127,52 +151,47 @@ int colorize(complex<double> c, unsigned char *row, int iX, int iMax) {
 
 
     /** do the compute **/
-    for (i = 0; i < iMax; i++) {
-        dC = 2.0 * dC * Z + 1.0;
-        Z = Z * Z + c;
-        if (i>i_skip) A += getT(Z);
-        R = abs(Z);
-        /* shape checking algorithm
-           skips iterating points within the main cardioid and secondary bulb, otherwise these
-           would all hit the max iterations
-           removes about 91% of the set from iteration
-           REMOVE THIS IF NOT RENDERING THE ENTIRE SET - more computation per iteration if the main
-           cardioid and secondary bulb are not shown onscreen */
-        double q = ((real(c) - 0.25) * (real(c) - 0.25)) + (imag(c) * imag(c));
-        double cardioid = 0.25 * imag(c) * imag(c);
-        double bulb = 0.0625;
-        if ((real(c) * real(c) + 2 * real(c) + 1 + imag(c) * imag(c)) < bulb ||
-            (q * (q +(real(c) - 0.25)) < cardioid))
+    if (!shape_check(c, b))
+    {
+        for (i = 0; i < iMax; i++)
         {
-            break;
+            dC = 2.0 * dC * Z + 1.0;
+            Z = Z * Z + c;
+            if (i > i_skip) A += getT(Z);
+            R = abs(Z);
+
+            /** get normal map **/
+            if (R > escapeRadius)
+            { // exterior of M set
+                u = Z / dC;
+                u = u / abs(u);
+                reflection = c_dot(u, v) + h2;
+                reflection =
+                        reflection / (1.0 + h2); // rescale so that t does not get bigger than 1
+                if (reflection < 0.0) reflection = 0.0;
+                break;
+            }
+            prevA = A; // save value for interpolation
         }
-        /** get normal map **/
-        if (R > escapeRadius) { // exterior of M set
-            u = Z / dC;
-            u = u / abs(u);
-            reflection = c_dot(u, v) + h2;
-            reflection = reflection / (1.0 + h2); // rescale so that t does not get bigger than 1
-            if (reflection < 0.0) reflection = 0.0;
-            break;
-        }
-        prevA = A; // save value for interpolation
-    }
-    /** get striping **/
-    if (i == iMax)
-        A = -1.0; // interior
-    else { // exterior
-        de = 2 * R * log(R) / abs(dC);
-        int thin = 3; // thinness of the border
-        if (de < (pixelWidth / thin)) A = FP_ZERO; //  boundary
-        else {
-            // computing interpolated average
-            A /= (i - i_skip) ; // A(n)
-            prevA /= (i - i_skip - 1) ; // A(n-1)
-            // smooth iteration count
-            d = i + 1 + log(lnER/log(R))/M_LN2;
-            d = d - (int)d; // only fractional part = interpolation coefficient
-            // linear interpolation
-            A = d*A + (1.0-d)*prevA;
+        /** get striping **/
+        if (i == iMax)
+            A = -1.0; // interior
+        else
+        { // exterior
+            de = 2 * R * log(R) / abs(dC);
+            int thin = 3; // thinness of the border
+            if (de < (pixelWidth / thin)) A = FP_ZERO; //  boundary
+            else
+            {
+                // computing interpolated average
+                A /= (i - i_skip); // A(n)
+                prevA /= (i - i_skip - 1); // A(n-1)
+                // smooth iteration count
+                d = i + 1 + log(lnER / log(R)) / M_LN2;
+                d = d - (int) d; // only fractional part = interpolation coefficient
+                // linear interpolation
+                A = d * A + (1.0 - d) * prevA;
+            }
         }
     }
 
@@ -241,11 +260,11 @@ void info() {
     // printf("pixelsAspectRatio = %.16f \n", pixelsAspectRatio);
     // printf("worldAspectRatio = %.16f \n", worldAspectRatio);
     distortion = pixelsAspectRatio - worldAspectRatio;
-    printf("distortion = %.16f (should be zero!)\n", distortion);
+    cout << "Distortion = " << distortion << " should be 0!\n";
     // printf("bailout value = Escape Radius = %.0f \n", escapeRadius);
     // printf("iterationMax = %d \n", iterationMax);
     // printf("i_skip = %d = number of skipped elements ( including t0 )= %d \n", i_skip, i_skip+1);
-    printf("file %s saved.\n", filename);
+    cout << "File " << filename << " saved\n";
 
 }
 
