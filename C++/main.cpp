@@ -1,4 +1,5 @@
-#include <cstdio>
+#include "PGM.h"
+
 #include <cmath>
 #include <complex>
 #include <chrono>
@@ -30,6 +31,7 @@ double pixelHeight; // =(CyMax-CyMin)/pYmax;
 const int maxColorComponentValue = 255; // rgb - SDR colorspace (8 bits per color)
 FILE * fp;
 char * filename = "..\\..\\output\\mandelbrot.ppm";
+string fileName = "..\\..\\output\\mandelbrot.ppm";
 // char * comment = "# "; // comment should start with #
 /**************************************************************************************************/
 
@@ -115,6 +117,19 @@ bool shape_check(complex<double> c, unsigned char color)
     }
 }
 
+double normal_map(complex<double> Z, complex<double> dC)
+{
+    double h2 = 1.5; // height factor of the incoming light
+    double angle = 45.0 / 360.0; // incoming direction of light in turns (change 1st #)
+    complex<double> u = Z / dC;
+    u = u / abs(u); // normalize
+    complex<double> v = exp(2.0 * angle * M_PI * 1i); // unit 2D vector in this direction
+    double reflection = c_dot(u, v) + h2;
+    reflection /= (1.0 + h2); // rescale so that t does not get bigger than 1
+    if (reflection < 0.0) reflection = 0.0;
+    return reflection;
+}
+
 /**
  * Function: colorize
  * ------------------
@@ -137,11 +152,6 @@ int colorize(complex<double> c, unsigned char *row, int iX, int iMax) {
     /** normal map **/
     complex<double> Z = 0.0; // initial value for iteration Z0
     complex<double> dC = 0.0; // derivative with respect to c
-    double reflection = FP_ZERO; // inside
-    double h2 = 1.5; // height factor of the incoming light
-    double angle = 45.0 / 360.0; // incoming direction of light in turns (change 1st #)
-    complex<double> v = exp(2.0 * angle * M_PI * 1i); // unit 2D vector in this direction
-    complex<double> u; // normal
     /** arg vars **/
     double A = 0.0; // A(n)
     double prevA = 0.0; // A(n-1)
@@ -155,20 +165,19 @@ int colorize(complex<double> c, unsigned char *row, int iX, int iMax) {
     {
         for (i = 0; i < iMax; i++)
         {
+            // bread and butter of Mandelbrot iteration
             dC = 2.0 * dC * Z + 1.0;
             Z = Z * Z + c;
-            if (i > i_skip) A += getT(Z);
+
+            if (i > i_skip)
+            {
+                A += getT(Z);
+            }
             R = abs(Z);
 
-            /** get normal map **/
+            // if the iterations determine c is outside the set
             if (R > escapeRadius)
-            { // exterior of M set
-                u = Z / dC;
-                u = u / abs(u);
-                reflection = c_dot(u, v) + h2;
-                reflection =
-                        reflection / (1.0 + h2); // rescale so that t does not get bigger than 1
-                if (reflection < 0.0) reflection = 0.0;
+            {
                 break;
             }
             prevA = A; // save value for interpolation
@@ -197,7 +206,7 @@ int colorize(complex<double> c, unsigned char *row, int iX, int iMax) {
 
     /** assign pixel color values **/
     int subPixel = 3 * iX;
-    if (reflection == FP_ZERO) { // interior of Mandelbrot set = black
+    if (i == iMax) { // interior of Mandelbrot set = black
         /* ppm files have pixels situated as groups of 3 ASCII chars in a row; the columns of the
            image file will be 3x as numerous as the rows
            attempting to store the image rows as a vector in memory and write to the file 1 row
@@ -210,7 +219,8 @@ int colorize(complex<double> c, unsigned char *row, int iX, int iMax) {
         // exterior of Mandelbrot set -> normal
     else { // multiply the underlying stripe gradient by the reflectivity map
         if (A == FP_ZERO) b = 255; // boundary
-        else b = (unsigned char) ((254-(100*A)) * reflection); // set color bounds for striping
+        else b = (unsigned char) ((254-(100*A)) * normal_map(Z, dC)); // set color bounds for
+        // striping
 
         row[subPixel] = b;
         row[subPixel+1] = b;
@@ -288,7 +298,18 @@ void close() {
 /********************************************** main **********************************************/
 int main() {
 
+    int width, height;
+    cout << "Enter width and height in pixels: \n";
+    cin >> width >> height;
+
     auto begin = chrono::steady_clock::now();
+
+    // set up image stream for writing
+    PGM pgm(fileName, width, height);
+    pgm.init_stream();
+    pgm.write_header();
+    // for testing
+    pgm.close();
 
     complex<double> c;
 
@@ -310,8 +331,8 @@ int main() {
             colorize(c, row, pX, iterationMax);
         }
         // write the cached row of pixels
+        // implemented due to possibility of having huge image
         fwrite(row, 1, (size_t)sizeof(row), fp);
-        //fwrite("\n", 1, 1, fp); // unnecessary
     }
 
     close();

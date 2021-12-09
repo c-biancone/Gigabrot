@@ -73,6 +73,12 @@ build CMakeFiles/C__.dir/MandelbrotConfigAbstract.cpp.o: CXX_COMPILER__C___Debug
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
+build CMakeFiles/C__.dir/PGM.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/PGM.cpp || cmake_object_order_depends_target_C__
+  DEP_FILE = CMakeFiles/C__.dir/PGM.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles/C__.dir
+  OBJECT_FILE_DIR = CMakeFiles/C__.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target C__
@@ -81,7 +87,7 @@ build CMakeFiles/C__.dir/MandelbrotConfigAbstract.cpp.o: CXX_COMPILER__C___Debug
 #############################################
 # Link the executable C__.exe
 
-build C__.exe: CXX_EXECUTABLE_LINKER__C___Debug CMakeFiles/C__.dir/main.cpp.o CMakeFiles/C__.dir/MandelbrotConfigAbstract.cpp.o
+build C__.exe: CXX_EXECUTABLE_LINKER__C___Debug CMakeFiles/C__.dir/main.cpp.o CMakeFiles/C__.dir/MandelbrotConfigAbstract.cpp.o CMakeFiles/C__.dir/PGM.cpp.o
   FLAGS = -g
   LINK_FLAGS = -Wl,--enable-auto-import
   OBJECT_DIR = CMakeFiles/C__.dir
