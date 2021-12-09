@@ -1,7 +1,9 @@
 #include <cstdio>
 #include <cmath>
 #include <complex>
-#include <sys\time.h>
+#include <chrono>
+#include <iostream>
+#include <iomanip>
 #include <omp.h>
 
 using namespace std;
@@ -266,8 +268,8 @@ void close() {
 
 /********************************************** main **********************************************/
 int main() {
-    struct timeval begin, end;
-    gettimeofday(&begin, 0);
+
+    auto begin = chrono::steady_clock::now();
 
     complex<double> c;
 
@@ -275,7 +277,7 @@ int main() {
 
     setup();
 
-    printf("Rendering row by row:\n");
+    cout << "Rendering row by row:\n";
 
 
     for (pY = 0; pY < pYmax; pY++)
@@ -295,11 +297,9 @@ int main() {
 
     close();
 
-    gettimeofday(&end, 0);
-    long seconds = end.tv_sec - begin.tv_sec;
-    long microseconds = end.tv_usec - begin.tv_usec;
-    double execTime = seconds + microseconds*1e-6;
-    printf("Time elapsed: %f seconds", execTime);
-
+    auto end = chrono::steady_clock::now();
+    cout << "Time elapsed:"
+        << chrono::duration_cast<chrono::seconds>(end - begin).count()
+        << " sec\n";
     return 0;
 }
