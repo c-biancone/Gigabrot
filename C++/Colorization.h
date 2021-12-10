@@ -41,6 +41,12 @@ protected:
 
     const int maxColorValue = 255;
 
+    int r;
+
+    int g;
+
+    int b;
+
 /**
  * Parametrized constructor
  * @param type of colorization

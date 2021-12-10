@@ -1,10 +1,19 @@
 #ifndef C___INSIDECOLOR_H
 #define C___INSIDECOLOR_H
 
+#include "Shading.h"
 
-class InsideColor
+class InsideColor : public Shading
 {
+public:
 
+    InsideColor();
+
+    int calculate_r();
+
+    int calculate_g();
+
+    int calculate_b();
 };
 
 
