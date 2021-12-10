@@ -4,29 +4,64 @@
 #include <fstream>
 #include <cstring>
 #include <sstream>
+#include <array>
+#include <vector>
 
 class PGM
 {
 public:
 
+    /**
+     * Parametrized constructor
+     * @param fileName
+     * @param width
+     * @param height
+     */
     PGM(std::string fileName, int width, int height);
 
+    /**
+     * Initialize ofstream
+     * @return
+     */
     bool init_stream();
 
-    bool write_row(std::string fileName, unsigned char * row);
+    /**
+     * Print row of pixels to PGM file - templated for size of array
+     * @tparam N - std::array size
+     * @param row - std::array of pixels
+     */
+    //template<size_t N>
+    void write_row(const std::vector<unsigned char>& row)
+    {
+        image.write((char const*)row.data(), row.size());
+    }
 
+    /**
+     * Print header data to PGM file
+     */
     void write_header();
 
+    /**
+     * Set width of PGM image
+     * @param widthIn
+     */
     void set_width(int widthIn);
 
+    /**
+     * Set height of PGM image
+     * @param heightIn
+     */
     void set_height(int heightIn);
 
+    /**
+     * Set custom comment for PGM image
+     * @param commentIn
+     */
     void set_comment(std::string commentIn);
 
-    void set_magic();
-
-    //static void set_comment();
-
+    /**
+     * Close ofstream for image
+     */
     void close();
 
 private:

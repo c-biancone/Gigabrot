@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <omp.h>
+#include <vector>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ double pixelWidth; //=(CxMax-CxMin)/pXmax;
 double pixelHeight; // =(CyMax-CyMin)/pYmax;
 const int maxColorComponentValue = 255; // rgb - SDR colorspace (8 bits per color)
 FILE * fp;
-char * filename = "..\\..\\output\\mandelbrot.ppm";
+//char * filename = "..\\..\\output\\mandelbrot.ppm";
 string fileName = "..\\..\\output\\mandelbrot.ppm";
 // char * comment = "# "; // comment should start with #
 /**************************************************************************************************/
@@ -39,7 +40,7 @@ string fileName = "..\\..\\output\\mandelbrot.ppm";
 unsigned char stripeDensity = 7; // higher is more dense
 int i_skip = 1; // exclude (i_skip+1) elements from average
 const double escapeRadius = 1000000; // big! (bail-out value)
-double lnER;
+double lnER = log(escapeRadius);
 /**************************************************************************************************/
 
 /**
@@ -145,7 +146,7 @@ double normal_map(complex<double> Z, complex<double> dC)
  * Returns:
  *  0 if completed.
  */
-int colorize(complex<double> c, array<unsigned char, (pXmax*3)>& row, int iX, int iMax) {
+int colorize(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
     /** global **/
     unsigned char b; // color
     int i; // iteration
@@ -241,14 +242,12 @@ int colorize(complex<double> c, array<unsigned char, (pXmax*3)>& row, int iX, in
  *  NULL
  */
 void setup() {
-    pixelWidth = (CxMax - CxMin) / pXmax;
-    pixelHeight = (CyMax - CyMin) / pYmax;
-    lnER = log(escapeRadius);
+
 
     // create new ppm6 file, give it a name, and open it in binary mode
-    fp = fopen(filename, "wb");
+    //fp = fopen(filename, "wb");
     // write ASCII header to the file
-    fprintf(fp, "P6\n %d\n %d\n %d\n", pXmax, pYmax, maxColorComponentValue);
+    //fprintf(fp, "P6\n %d\n %d\n %d\n", pXmax, pYmax, maxColorComponentValue);
 }
 
 /**
@@ -262,10 +261,10 @@ void setup() {
  * Returns:
  *  NULL
  */
-void info() {
+void info(int width, int height) {
     double distortion;
     // width/height
-    double pixelsAspectRatio = (double) pXmax / pYmax;
+    double pixelsAspectRatio = (double) width / height;
     double worldAspectRatio = (CxMax - CxMin) / (CyMax - CyMin);
     // printf("pixelsAspectRatio = %.16f \n", pixelsAspectRatio);
     // printf("worldAspectRatio = %.16f \n", worldAspectRatio);
@@ -274,56 +273,50 @@ void info() {
     // printf("bailout value = Escape Radius = %.0f \n", escapeRadius);
     // printf("iterationMax = %d \n", iterationMax);
     // printf("i_skip = %d = number of skipped elements ( including t0 )= %d \n", i_skip, i_skip+1);
-    cout << "File " << filename << " saved\n";
+    cout << "File " << fileName << " saved\n";
 
 }
 
-/**
- * Function: close
- * ---------------
- * Closes file stream and calls debugging info function.
- *
- * Inputs:
- *  NULL
- *
- * Returns:
- *  NULL
- */
-void close() {
-    fclose(fp);
-    info();
+int get_dims(istream& in)
+{
+    int tmp;
+    in >> tmp;
+    return tmp;
 }
 
 
 /********************************************** main **********************************************/
 int main() {
 
-    int width, height;
     cout << "Enter width and height in pixels: \n";
-    cin >> width >> height;
+    const int width = get_dims(cin);
+    const int height = get_dims(cin);
+
+    pixelWidth = (CxMax - CxMin) / width;
+    pixelHeight= (CyMax - CyMin) / height;
 
     auto begin = chrono::steady_clock::now();
 
     // set up image stream for writing
     PGM pgm(fileName, width, height);
-    pgm.init_stream();
+    if (!pgm.init_stream())
+    {
+        cout << "Could not open ofstream for image";
+    }
     pgm.write_header();
-    // for testing
-    pgm.close();
 
     complex<double> c;
+    vector<unsigned char> row{}; // didn't realize array needs compile-time const length :(
+    row.resize(width * 3);
 
-    array<unsigned char, (pXmax * 3)> row{};
-
-    setup();
+    //setup();
 
     cout << "Rendering row by row:\n";
 
-
-    for (pY = 0; pY < pYmax; pY++)
+    for (pY = 0; pY < height; pY++)
     {
-#pragma omp parallel for schedule(dynamic)
-        for (pX = 0; pX < pXmax; pX++)
+//#pragma omp parallel for schedule(dynamic)
+        for (pX = 0; pX < width; pX++)
         {
             // compute pixel coordinate
             c = get_c(pX, pY);
@@ -332,10 +325,12 @@ int main() {
         }
         // write the cached row of pixels
         // implemented due to possibility of having huge image
-        fwrite(row.data(), sizeof(row[0]), row.size(), fp);
+        pgm.write_row(row);
     }
 
-    close();
+    pgm.close();
+
+    info(width, height);
 
     auto end = chrono::steady_clock::now();
     cout << "Time elapsed:"

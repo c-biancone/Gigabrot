@@ -10,7 +10,7 @@ PGM::PGM(std::string fileName, int width, int height) : fileName(std::move(fileN
 
 bool PGM::init_stream()
 {
-    image.open(fileName);
+    image.open(fileName, ios::binary);
 
     if (image.is_open())
     {
@@ -25,13 +25,7 @@ void PGM::write_header()
     string widthStr = to_string(this->width);
     string lengthStr = to_string(this->height);
     header << magic << widthStr << " " << lengthStr << "\n" << comment << "\n" << pixMaxVal;
-
     image << header.rdbuf();
-}
-
-bool PGM::write_row(std::string fileName, unsigned char *row)
-{
-    return false;
 }
 
 void PGM::set_width(int widthIn)
