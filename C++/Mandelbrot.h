@@ -17,11 +17,23 @@ public:
 
     void set_max_iter(size_t iterMax);
 
+    /**
+     * Shape checking algorithm - determines if point is within main cardioid or secondary bulb
+     * Removes about 91% of the set from being iterated
+     * Should not be implemented for a render that does not include these parts, will add unnecessary
+     * computing
+     * @param c - complex number location
+     * @return TRUE if within the main shapes
+     */
+    bool shape_check(std::complex<double> c);
+
     int iter;
 
 private:
 
-    const int iterMax;
+    const int iterMax = 1000;
+
+    std::complex<double> c;
 
     std::complex<double> r;
 
@@ -33,8 +45,16 @@ private:
 
     double cardioid;
 
-    const double bulb;
+    const double bulb = 0.0625;
 
+    // coordinate plane
+    double cxMin;
+
+    double cxMax;
+
+    double cyMin;
+
+    double cyMax;
 
 };
 

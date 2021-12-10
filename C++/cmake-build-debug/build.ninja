@@ -67,14 +67,20 @@ build CMakeFiles/C__.dir/main.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documen
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
-build CMakeFiles/C__.dir/MandelbrotConfigAbstract.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/MandelbrotConfigAbstract.cpp || cmake_object_order_depends_target_C__
-  DEP_FILE = CMakeFiles/C__.dir/MandelbrotConfigAbstract.cpp.o.d
+build CMakeFiles/C__.dir/PGM.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/PGM.cpp || cmake_object_order_depends_target_C__
+  DEP_FILE = CMakeFiles/C__.dir/PGM.cpp.o.d
   FLAGS = -g -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
-build CMakeFiles/C__.dir/PGM.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/PGM.cpp || cmake_object_order_depends_target_C__
-  DEP_FILE = CMakeFiles/C__.dir/PGM.cpp.o.d
+build CMakeFiles/C__.dir/Mandelbrot.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/Mandelbrot.cpp || cmake_object_order_depends_target_C__
+  DEP_FILE = CMakeFiles/C__.dir/Mandelbrot.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles/C__.dir
+  OBJECT_FILE_DIR = CMakeFiles/C__.dir
+
+build CMakeFiles/C__.dir/Colorization.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/Colorization.cpp || cmake_object_order_depends_target_C__
+  DEP_FILE = CMakeFiles/C__.dir/Colorization.cpp.o.d
   FLAGS = -g -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
@@ -87,7 +93,7 @@ build CMakeFiles/C__.dir/PGM.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Document
 #############################################
 # Link the executable C__.exe
 
-build C__.exe: CXX_EXECUTABLE_LINKER__C___Debug CMakeFiles/C__.dir/main.cpp.o CMakeFiles/C__.dir/MandelbrotConfigAbstract.cpp.o CMakeFiles/C__.dir/PGM.cpp.o
+build C__.exe: CXX_EXECUTABLE_LINKER__C___Debug CMakeFiles/C__.dir/main.cpp.o CMakeFiles/C__.dir/PGM.cpp.o CMakeFiles/C__.dir/Mandelbrot.cpp.o CMakeFiles/C__.dir/Colorization.cpp.o
   FLAGS = -g
   LINK_FLAGS = -Wl,--enable-auto-import
   OBJECT_DIR = CMakeFiles/C__.dir

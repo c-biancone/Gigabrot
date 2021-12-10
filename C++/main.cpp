@@ -14,8 +14,6 @@ using namespace std;
 
 /************************************* image variables ********************************************/
 int pX, pY;
-const int pXmax = 1280; // 2 billion+ px each side should be enough resolution right???????
-const int pYmax = 1280; // for main antenna
 const int iterationMax = 1000;
 /**************************************************************************************************/
 
@@ -29,11 +27,8 @@ const double CyMax = 1.5;
 /**************************************** file stuff **********************************************/
 double pixelWidth; //=(CxMax-CxMin)/pXmax;
 double pixelHeight; // =(CyMax-CyMin)/pYmax;
-const int maxColorComponentValue = 255; // rgb - SDR colorspace (8 bits per color)
-FILE * fp;
-//char * filename = "..\\..\\output\\mandelbrot.ppm";
+const int maxColorValue = 255; // rgb - SDR colorspace (8 bits per color)
 string fileName = "..\\..\\output\\mandelbrot.ppm";
-// char * comment = "# "; // comment should start with #
 /**************************************************************************************************/
 
 /************************************* render parameters ******************************************/
@@ -100,10 +95,9 @@ double getT(complex<double> z){
  * Should not be implemented for a render that does not include these parts, will add unnecessary
  * computing
  * @param c - complex number location
- * @param color - pixel value
  * @return TRUE if within the main shapes
  */
-bool shape_check(complex<double> c, unsigned char color)
+bool shape_check(complex<double> c)
 {
     double q = ((real(c) - 0.25) * (real(c) - 0.25)) + (imag(c) * imag(c));
     double cardioid = 0.25 * imag(c) * imag(c);
@@ -111,7 +105,6 @@ bool shape_check(complex<double> c, unsigned char color)
     if ((real(c) * real(c) + 2 * real(c) + 1 + imag(c) * imag(c)) < bulb ||
         (q * (q +(real(c) - 0.25)) < cardioid))
     {
-        color = 0; // black
         return true;
     } else {
         return false;
@@ -132,7 +125,7 @@ double normal_map(complex<double> Z, complex<double> dC)
 }
 
 /**
- * Function: colorize
+ * Function: iterate
  * ------------------
  * The bread and butter of this program; determines if point is within set by escape-time
  * algorithm and performs the colorization of the corresponding pixel.
@@ -146,7 +139,7 @@ double normal_map(complex<double> Z, complex<double> dC)
  * Returns:
  *  0 if completed.
  */
-int colorize(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
+int iterate(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
     /** global **/
     unsigned char b; // color
     int i; // iteration
@@ -162,7 +155,7 @@ int colorize(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
 
 
     /** do the compute **/
-    if (!shape_check(c, b))
+    if (!shape_check(c))
     {
         for (i = 0; i < iMax; i++)
         {
@@ -172,7 +165,7 @@ int colorize(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
 
             if (i > i_skip)
             {
-                A += getT(Z);
+                A += getT(Z); // assigning here to avoid creation of a double array with iMax length
             }
             R = abs(Z);
 
@@ -219,8 +212,10 @@ int colorize(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
 
         // exterior of Mandelbrot set -> normal
     else { // multiply the underlying stripe gradient by the reflectivity map
-        if (A == FP_ZERO) b = 255; // boundary
-        else b = (unsigned char) ((254-(100*A)) * normal_map(Z, dC)); // set color bounds for
+        if (A == FP_ZERO) b = maxColorValue; // boundary
+        // reflection calculated here now!
+        else b = (unsigned char) (((maxColorValue-1)-(100*A)) * normal_map(Z, dC)); // set color
+        // bounds for
         // striping
 
         row[subPixel] = b;
@@ -254,7 +249,6 @@ void info(int width, int height) {
     // printf("iterationMax = %d \n", iterationMax);
     // printf("i_skip = %d = number of skipped elements ( including t0 )= %d \n", i_skip, i_skip+1);
     cout << "File " << fileName << " saved\n";
-
 }
 
 int get_dims(istream& in)
@@ -287,7 +281,7 @@ int main() {
 
     complex<double> c;
     vector<unsigned char> row{}; // didn't realize array needs compile-time const length :(
-    row.resize(width * 3);
+    row.resize(width * 3); // avoid constant resizing by allocating up front
 
     //setup();
 
@@ -301,7 +295,7 @@ int main() {
             // compute pixel coordinate
             c = get_c(pX, pY);
             // compute  pixel color (24 bit = 3 bytes)
-            colorize(c, row, pX, iterationMax);
+            iterate(c, row, pX, iterationMax);
         }
         // write the cached row of pixels
         // implemented due to possibility of having huge image
