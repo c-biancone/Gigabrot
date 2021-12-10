@@ -231,26 +231,6 @@ int colorize(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
 }
 
 /**
- * Function: setup
- * ---------------
- * Sets up the .ppm file stream and parameters.
- *
- * Inputs:
- *  NULL
- *
- * Returns:
- *  NULL
- */
-void setup() {
-
-
-    // create new ppm6 file, give it a name, and open it in binary mode
-    //fp = fopen(filename, "wb");
-    // write ASCII header to the file
-    //fprintf(fp, "P6\n %d\n %d\n %d\n", pXmax, pYmax, maxColorComponentValue);
-}
-
-/**
  * Function: info
  * --------------
  * Provides debugging information from the file.
