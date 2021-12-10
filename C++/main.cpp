@@ -145,7 +145,7 @@ double normal_map(complex<double> Z, complex<double> dC)
  * Returns:
  *  0 if completed.
  */
-int colorize(complex<double> c, unsigned char *row, int iX, int iMax) {
+int colorize(complex<double> c, array<unsigned char, (pXmax*3)>& row, int iX, int iMax) {
     /** global **/
     unsigned char b; // color
     int i; // iteration
@@ -313,7 +313,7 @@ int main() {
 
     complex<double> c;
 
-    unsigned char row[pXmax * 3];
+    array<unsigned char, (pXmax * 3)> row{};
 
     setup();
 
@@ -332,7 +332,7 @@ int main() {
         }
         // write the cached row of pixels
         // implemented due to possibility of having huge image
-        fwrite(row, 1, (size_t)sizeof(row), fp);
+        fwrite(row.data(), sizeof(row[0]), row.size(), fp);
     }
 
     close();
