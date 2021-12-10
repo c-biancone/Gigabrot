@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Colorization::Colorization(string type) : type(std::move(type))
+Colorization::Colorization(string subtype) : subtype(std::move(subtype))
 {}
 
 std::string Colorization::get_type()
@@ -17,4 +17,4 @@ void Colorization::set_type(string typeIn)
     type = std::move(typeIn);
 }
 
-Colorization::~Colorization() = default;
+Colorization::~Colorization() = default;6

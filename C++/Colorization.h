@@ -9,12 +9,8 @@
 
 class Colorization
 {
-    /**
-     * Parametrized constructor
-     * @param type of colorization
-     */
-    explicit Colorization(std::string type);
 
+public:
     /**
      * @return type of colorization
      */
@@ -26,12 +22,11 @@ class Colorization
     void set_type(std::string typeIn);
 
     /**
-     * Implemented at
-     * @param i
-     * @param iMax
-     * @return
+     * @param subtypeIn of colorization type
      */
-    virtual int calculate(int i, int iMax) = 0;
+    virtual void set_subtype(std::string subtypeIn) = 0;
+
+    virtual int get_max_color_value() = 0;
 
     virtual ~Colorization();
 
@@ -42,10 +37,15 @@ protected:
      */
     std::string type;
 
-    /**
-     * 0 - 255
-     */
-    int pixelValue;
+    std::string subtype;
+
+    const int maxColorValue = 255;
+
+/**
+ * Parametrized constructor
+ * @param type of colorization
+ */
+explicit Colorization(std::string subtype);
 };
 
 
