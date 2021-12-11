@@ -2,12 +2,14 @@
 
 using namespace std;
 
-Striping::Striping(double average) : Shading("Striping"), average(average)
+Striping::Striping(double average, complex<double> z, complex<double> dc) : Shading("Striping"),
+average(average), reflection(z, dc)
 {}
 
 unsigned char Striping::calculate_bw()
 {
-  return (unsigned char) (maxColorValue - 1) - (100 * average);
+  return static_cast<unsigned char>((static_cast<double>(maxColorValue) - 1.0) - (100.0 *
+  average) * reflection.calculate());
 }
 
 unsigned char Striping::calculate_r()
