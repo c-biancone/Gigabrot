@@ -3,6 +3,7 @@
 
 #include <string>
 #include <complex>
+#include <cmath>
 
 class NormalMap
 {
@@ -12,6 +13,8 @@ class NormalMap
 
   virtual double calculate() = 0;
 
+  double dot_product(std::complex<double> u, std::complex<double> v);
+
  protected:
 
   explicit NormalMap(std::string type);
@@ -20,12 +23,10 @@ class NormalMap
 
   const double maxMapVal = 1.0;
 
-  std::complex<double> z;
-
-  std::complex<double> dC;
+  std::string type;
 
  private:
-  std::string type;
+
 };
 
 #endif //C___NORMALMAP_H

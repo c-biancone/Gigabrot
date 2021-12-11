@@ -1,5 +1,7 @@
 #include "Striping.h"
 
+using namespace std;
+
 Striping::Striping(double average) : Shading("Striping"), average(average)
 {}
 
