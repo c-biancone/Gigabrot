@@ -42,7 +42,7 @@ void Mandelbrot::get_c()
   c = static_cast<double>((cxMin + pX * pixWidth) + (cyMax - pY * pixHeight * 1i));
 }
 
-int Mandelbrot::iterate()
+void Mandelbrot::iterate()
 {
   if (!this->shape_check())
   {
@@ -69,8 +69,6 @@ int Mandelbrot::iterate()
 
     average();
   }
-
-  return 0;
 }
 
 unsigned char Mandelbrot::colorize_bw()

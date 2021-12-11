@@ -28,7 +28,7 @@ class Mandelbrot
 
   void get_c();
 
-  int iterate();
+  void iterate();
 
   unsigned char colorize_bw();
 

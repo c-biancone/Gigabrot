@@ -289,6 +289,8 @@ int main() {
 
     //setup();
 
+    Mandelbrot gigabrot(width, height);
+
     cout << "Rendering row by row:\n";
 
 ////////////// testing class hierarchy/methods
@@ -315,10 +317,15 @@ int main() {
 //#pragma omp parallel for schedule(dynamic)
         for (pX = 0; pX < width; pX++)
         {
+          /*
             // compute pixel coordinate
             c = get_c(pX, pY);
             // compute  pixel color (24 bit = 3 bytes)
             iterate(c, row, pX, iterationMax);
+            */
+          gigabrot.get_c();
+          gigabrot.iterate();
+          // colorize
         }
         // write the cached row of pixels
         // implemented due to possibility of having huge image
