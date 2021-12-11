@@ -44,7 +44,7 @@ void Mandelbrot::get_c()
 {
   pixWidth = (cxMax-cxMin) / width;
   pixHeight = (cyMax-cyMin) / height;
-  c = ((static_cast<double>(cxMin) + pX * pixWidth) + (cyMax - pY * pixHeight * 1i));
+  c = (cxMin + pX * pixWidth) + ((cyMax - pY * pixHeight) * 1i);
 }
 
 void Mandelbrot::iterate()

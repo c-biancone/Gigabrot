@@ -325,9 +325,9 @@ int main() {
           gigabrot.get_c();
           gigabrot.iterate();
           unsigned char tmp = gigabrot.colorize_bw();
-          row[pX] = tmp;
-          row[pX+1] = tmp;
-          row[pX+2] = tmp;
+          row[3*pX] = tmp;
+          row[3*pX+1] = tmp;
+          row[3*pX+2] = tmp;
 
         }
         // write the cached row of pixels
