@@ -1,4 +1,8 @@
 #include "PGM.h"
+#include "Colorization.h"
+#include "Shading.h"
+#include "InsideColor.h"
+#include "LineColor.h"
 
 #include <cmath>
 #include <complex>
@@ -286,6 +290,25 @@ int main() {
     //setup();
 
     cout << "Rendering row by row:\n";
+
+// testing class hierarchy/methods
+    int pixTest = 0;
+    Shading *shade;
+    shade = new LineColor();
+
+    LineColor *color;
+    color = dynamic_cast<LineColor *>(shade);
+
+    pixTest = color->calculate_r();
+
+    cout << "pixTest = " << pixTest;
+
+    shade = new InsideColor;
+    InsideColor *color1;
+    color1 = dynamic_cast<InsideColor *>(shade);
+    pixTest = color1->calculate_r();
+    cout << " " << pixTest << "\n";
+
 
     for (pY = 0; pY < height; pY++)
     {

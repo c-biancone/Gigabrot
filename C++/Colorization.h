@@ -51,7 +51,7 @@ protected:
  * Parametrized constructor
  * @param type of colorization
  */
-explicit Colorization(std::string subtype);
+explicit Colorization(std::string type);
 };
 
 

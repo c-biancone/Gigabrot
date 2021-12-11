@@ -6,7 +6,7 @@
 
 #include <utility>
 
-Shading::Shading(std::string subtype) : Colorization(std::move(subtype))
+Shading::Shading(std::string type) : Colorization(std::move(type))
 {}
 
 void Shading::set_subtype(std::string subtypeIn)

@@ -1,7 +1,3 @@
-//
-// Created by Chris on 12/10/2021.
-//
-
 #ifndef C___LINECOLOR_H
 #define C___LINECOLOR_H
 
@@ -20,6 +16,5 @@ public:
     int calculate_b();
 
 };
-
 
 #endif //C___LINECOLOR_H

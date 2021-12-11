@@ -1,7 +1,3 @@
-//
-// Created by Chris on 12/10/2021.
-//
-
 #include "LineColor.h"
 
 LineColor::LineColor() : Shading("Line")
@@ -12,7 +8,7 @@ LineColor::LineColor() : Shading("Line")
 int LineColor::calculate_r()
 {
     r = 255;
-    return r;
+    return 255;
 }
 
 int LineColor::calculate_g()

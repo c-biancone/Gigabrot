@@ -18,12 +18,13 @@ public:
 
     void set_subtype(std::string subtypeIn);
 
-    /**
-     * @return value of pixel color
-     */
-    virtual int calculate() = 0;
-
     int get_max_color_value();
+
+    virtual int calculate_r() = 0;
+
+    virtual int calculate_g() = 0;
+
+    virtual int calculate_b() = 0;
 
 private:
 

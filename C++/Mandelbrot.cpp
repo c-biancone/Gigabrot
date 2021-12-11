@@ -1,7 +1,7 @@
 #include "Mandelbrot.h"
 
 Mandelbrot::Mandelbrot(int iterMax, double xMin, double xMax, double yMin, double yMax) : iterMax
-(iterMax),
+(iterMax)
 {}
 
 bool Mandelbrot::shape_check(std::complex<double> c)
