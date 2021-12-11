@@ -20,7 +20,7 @@ class Mandelbrot
    * @param pX - image width
    * @param pY - image height
    */
-  Mandelbrot(int pX, int pY);
+  Mandelbrot(int pX, int pY, int width, int height);
 
   //Mandelbrot(int pX, int pY, int iterMax, double xMin, double xMax, double yMin, double yMax);
 
@@ -88,6 +88,10 @@ class Mandelbrot
   double cyMax;
 
   // image
+  int width;
+
+  int height;
+
   int pX;
 
   int pY;

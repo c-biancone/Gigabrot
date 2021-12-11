@@ -6,7 +6,9 @@ using namespace std;
 
 PGM::PGM(std::string fileName, int width, int height) : fileName(std::move(fileName)), width
     (width), height(height)
-{}
+{
+  subPixel = width * 3;
+}
 
 bool PGM::init_stream()
 {

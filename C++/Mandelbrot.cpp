@@ -1,6 +1,9 @@
 #include "Mandelbrot.h"
 
-Mandelbrot::Mandelbrot(int pX, int pY) : pX(pX), pY(pY)
+using namespace std;
+
+Mandelbrot::Mandelbrot(int pX, int pY, int width, int height) : pX(pX), pY(pY), width(width),
+height(height)
 {
   iter = 0;
   iterMax = 1000;
@@ -21,8 +24,8 @@ Mandelbrot::Mandelbrot(int pX, int pY) : pX(pX), pY(pY)
   cxMax = 0.8;
   cyMin = -1.5;
   cyMax = 1.5;
-  pixWidth = (cxMax-cxMin) / pX;
-  pixHeight = (cyMax-cyMin) / pY;
+  pixWidth = 0.0;
+  pixHeight = 0.0;
   iSkip = 1;
   thin = 3;
   shade = nullptr; // avoid calling "new" more than once per pixel
@@ -39,7 +42,9 @@ Mandelbrot::~Mandelbrot()
 
 void Mandelbrot::get_c()
 {
-  c = static_cast<double>((cxMin + pX * pixWidth) + (cyMax - pY * pixHeight * 1i));
+  pixWidth = (cxMax-cxMin) / width;
+  pixHeight = (cyMax-cyMin) / height;
+  c = ((static_cast<double>(cxMin) + pX * pixWidth) + (cyMax - pY * pixHeight * 1i));
 }
 
 void Mandelbrot::iterate()

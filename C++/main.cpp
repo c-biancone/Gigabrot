@@ -289,12 +289,10 @@ int main() {
 
     //setup();
 
-    Mandelbrot gigabrot(width, height);
-
     cout << "Rendering row by row:\n";
 
 ////////////// testing class hierarchy/methods
-    int pixTest = 0;
+/*    int pixTest = 0;
     Shading *shade;
     shade = new LineColor();
 
@@ -310,7 +308,7 @@ int main() {
     color1 = dynamic_cast<InsideColor *>(shade);
     pixTest = color1->calculate_r();
     cout << " " << pixTest << "\n";
-/////////////////////////////////////////////
+/////////////////////////////////////////////*/
 
     for (pY = 0; pY < height; pY++)
     {
@@ -323,9 +321,14 @@ int main() {
             // compute  pixel color (24 bit = 3 bytes)
             iterate(c, row, pX, iterationMax);
             */
+          Mandelbrot gigabrot(pX, pY, width, height);
           gigabrot.get_c();
           gigabrot.iterate();
-          // colorize
+          unsigned char tmp = gigabrot.colorize_bw();
+          row[pX] = tmp;
+          row[pX+1] = tmp;
+          row[pX+2] = tmp;
+
         }
         // write the cached row of pixels
         // implemented due to possibility of having huge image
