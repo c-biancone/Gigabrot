@@ -9,51 +9,49 @@
 
 class Colorization
 {
-public:
-    /**
-     * @return type of colorization
-     */
-    std::string get_type();
+ public:
+  /**
+   * @return type of colorization
+   */
+  std::string get_type();
 
-    /**
-     * @param typeIn type of colorization
-     */
-    void set_type(std::string typeIn);
+  /**
+   * @param typeIn type of colorization
+   */
+  void set_type(std::string typeIn);
 
-    /**
-     * @param subtypeIn of colorization type
-     */
-    virtual void set_subtype(std::string subtypeIn) = 0;
+  /**
+   * @param subtypeIn of colorization type
+   */
+  virtual void set_subtype(std::string subtypeIn) = 0;
 
-    virtual unsigned char get_max_color_value() = 0;
+  virtual unsigned char get_max_color_value() = 0;
 
-    virtual ~Colorization();
+  virtual ~Colorization();
 
-protected:
+ protected:
+  /**
+   * Determines type of colorization
+   */
+  std::string type;
 
-    /**
-     * Determines type of colorization
-     */
-    std::string type;
+  std::string subtype;
 
-    std::string subtype;
+  const unsigned char maxColorValue = 255;
 
-    const unsigned char maxColorValue = 255;
+  const unsigned char minColorValue = 0;
 
-    const unsigned char minColorValue = 0;
+  unsigned char r;
 
-    unsigned char r;
+  unsigned char g;
 
-    unsigned char g;
+  unsigned char b;
 
-    unsigned char b;
-
-/**
- * Parametrized constructor
- * @param type of colorization
- */
-explicit Colorization(std::string type);
+  /**
+   * Parametrized constructor
+   * @param type of colorization
+   */
+  explicit Colorization(std::string type);
 };
 
-
-#endif //C___COLORIZATION_H
+#endif  // C___COLORIZATION_H

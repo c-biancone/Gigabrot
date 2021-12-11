@@ -9,11 +9,16 @@ public:
 
     std::string get_type();
 
+
 protected:
+
+    explicit NormalMap(std::string type);
 
     std::string type;
 
-    explicit NormalMap(std::string type);
+    const double minMapVal = 0.0;
+
+    const double maxMapVal = 1.0;
 };
 
 
