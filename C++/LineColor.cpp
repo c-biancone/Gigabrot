@@ -1,24 +1,24 @@
 #include "LineColor.h"
 
 LineColor::LineColor() : Shading("Line")
-{
+{}
 
+unsigned char LineColor::calculate_bw()
+{
+    return maxColorValue;
 }
 
-int LineColor::calculate_r()
+unsigned char LineColor::calculate_r()
 {
-    r = 255;
-    return 255;
+    return maxColorValue;
 }
 
-int LineColor::calculate_g()
+unsigned char LineColor::calculate_g()
 {
-    g = 255;
-    return g;
+    return maxColorValue;
 }
 
-int LineColor::calculate_b()
+unsigned char LineColor::calculate_b()
 {
-    b = 255;
-    return g;
+    return maxColorValue;
 }

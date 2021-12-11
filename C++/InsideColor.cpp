@@ -3,20 +3,22 @@
 InsideColor::InsideColor() : Shading("Inside")
 {}
 
-int InsideColor::calculate_r()
+unsigned char InsideColor::calculate_bw()
 {
-    r = 0;
-    return r;
+    return minColorValue;
 }
 
-int InsideColor::calculate_g()
+unsigned char InsideColor::calculate_r()
 {
-    g = 0;
-    return g;
+    return minColorValue;
 }
 
-int InsideColor::calculate_b()
+unsigned char InsideColor::calculate_g()
 {
-    b = 0;
-    return b;
+    return minColorValue;
+}
+
+unsigned char InsideColor::calculate_b()
+{
+    return minColorValue;
 }

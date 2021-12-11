@@ -291,7 +291,7 @@ int main() {
 
     cout << "Rendering row by row:\n";
 
-// testing class hierarchy/methods
+////////////// testing class hierarchy/methods
     int pixTest = 0;
     Shading *shade;
     shade = new LineColor();
@@ -308,7 +308,7 @@ int main() {
     color1 = dynamic_cast<InsideColor *>(shade);
     pixTest = color1->calculate_r();
     cout << " " << pixTest << "\n";
-
+/////////////////////////////////////////////
 
     for (pY = 0; pY < height; pY++)
     {

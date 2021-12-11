@@ -9,7 +9,6 @@
 
 class Colorization
 {
-
 public:
     /**
      * @return type of colorization
@@ -26,7 +25,7 @@ public:
      */
     virtual void set_subtype(std::string subtypeIn) = 0;
 
-    virtual int get_max_color_value() = 0;
+    virtual unsigned char get_max_color_value() = 0;
 
     virtual ~Colorization();
 
@@ -39,13 +38,15 @@ protected:
 
     std::string subtype;
 
-    const int maxColorValue = 255;
+    const unsigned char maxColorValue = 255;
 
-    int r;
+    const unsigned char minColorValue = 0;
 
-    int g;
+    unsigned char r;
 
-    int b;
+    unsigned char g;
+
+    unsigned char b;
 
 /**
  * Parametrized constructor

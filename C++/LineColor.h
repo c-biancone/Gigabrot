@@ -9,12 +9,13 @@ public:
 
     LineColor();
 
-    int calculate_r();
+    unsigned char calculate_bw();
 
-    int calculate_g();
+    unsigned char calculate_r();
 
-    int calculate_b();
+    unsigned char calculate_g();
 
+    unsigned char calculate_b();
 };
 
 #endif //C___LINECOLOR_H

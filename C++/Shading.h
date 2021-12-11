@@ -1,7 +1,3 @@
-//
-// Created by Chris on 12/10/2021.
-//
-
 #ifndef C___SHADING_H
 #define C___SHADING_H
 
@@ -18,13 +14,15 @@ public:
 
     void set_subtype(std::string subtypeIn);
 
-    int get_max_color_value();
+    unsigned char get_max_color_value();
 
-    virtual int calculate_r() = 0;
+    virtual unsigned char calculate_bw() = 0;
 
-    virtual int calculate_g() = 0;
+    virtual unsigned char calculate_r() = 0;
 
-    virtual int calculate_b() = 0;
+    virtual unsigned char calculate_g() = 0;
+
+    virtual unsigned char calculate_b() = 0;
 
 private:
 

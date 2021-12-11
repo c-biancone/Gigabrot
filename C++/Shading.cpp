@@ -1,7 +1,3 @@
-//
-// Created by Chris on 12/10/2021.
-//
-
 #include "Shading.h"
 
 #include <utility>
@@ -14,7 +10,7 @@ void Shading::set_subtype(std::string subtypeIn)
     subtype = subtypeIn;
 }
 
-int Shading::get_max_color_value()
+unsigned char Shading::get_max_color_value()
 {
     return maxColorValue;
 }
