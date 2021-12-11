@@ -1,7 +1,3 @@
-//
-// Created by Chris on 12/10/2021.
-//
-
 #ifndef C___COLORIZATION_H
 #define C___COLORIZATION_H
 

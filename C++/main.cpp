@@ -3,6 +3,7 @@
 #include "Shading.h"
 #include "InsideColor.h"
 #include "LineColor.h"
+#include "Mandelbrot.h"
 
 #include <cmath>
 #include <complex>

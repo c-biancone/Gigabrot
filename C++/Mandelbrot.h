@@ -1,6 +1,10 @@
 #ifndef C___MANDELBROT_H
 #define C___MANDELBROT_H
 
+#include "Shading.h"
+#include "InsideColor.h"
+#include "LineColor.h"
+#include "Striping.h"
 #include <cmath>
 #include <complex>
 #include <algorithm>
@@ -18,21 +22,26 @@ class Mandelbrot
    */
   Mandelbrot(int pX, int pY);
 
-  Mandelbrot(int pX, int pY, int iterMax, double xMin, double xMax, double yMin, double yMax);
+  //Mandelbrot(int pX, int pY, int iterMax, double xMin, double xMax, double yMin, double yMax);
 
-  int iterate(size_t iter);
+  ~Mandelbrot();
 
-  void set_max_iter(size_t iterMax);
+  void get_c();
+
+  int iterate();
+
+  unsigned char colorize_bw();
 
   /**
    * Shape checking algorithm - determines if point is within main cardioid or secondary bulb
    * Removes about 91% of the set from being iterated
    * Should not be implemented for a render that does not include these parts, will add unnecessary
    * computing
-   * @param c - complex number location
    * @return TRUE if within the main shapes
    */
-  bool shape_check(std::complex<double> c);
+  bool shape_check();
+
+  double get_t();
 
   void interpolate();
 
@@ -79,9 +88,9 @@ class Mandelbrot
   double cyMax;
 
   // image
-  double pX;
+  int pX;
 
-  double pY;
+  int pY;
 
   double pixWidth;
 
@@ -91,6 +100,11 @@ class Mandelbrot
   double a;
 
   double prevA;
+
+  /**
+   * Higher is more dense
+   */
+  double stripeDensity;
 
   /**
    * Exclude iSkip+1 elements from average
@@ -103,6 +117,9 @@ class Mandelbrot
   // boundary descriptor
   double de;
   int thin;
+
+  Shading *shade;
+
 };
 
 #endif //C___MANDELBROT_H
