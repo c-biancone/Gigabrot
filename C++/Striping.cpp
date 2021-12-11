@@ -9,7 +9,7 @@ average(average), reflection(z, dc)
 unsigned char Striping::calculate_bw()
 {
   return static_cast<unsigned char>((static_cast<double>(maxColorValue) - 1.0) - (100.0 *
-  average) * reflection.calculate());
+  average) * reflection.calculate()); // explicit casting
 }
 
 unsigned char Striping::calculate_r()

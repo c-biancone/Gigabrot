@@ -74,7 +74,7 @@ complex<double> get_c(int iX, int iY) {
  *  The dot product in double form.
  */
 double c_dot(complex<double> a, complex<double> b) {
-    return real(a) * real(b) + imag(a) * imag(b);
+
 }
 
 /**
