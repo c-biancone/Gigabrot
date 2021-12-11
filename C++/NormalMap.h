@@ -2,24 +2,30 @@
 #define C___NORMALMAP_H
 
 #include <string>
+#include <complex>
 
 class NormalMap
 {
-public:
+ public:
 
-    std::string get_type();
+  std::string get_type();
 
+  virtual double calculate() = 0;
 
-protected:
+ protected:
 
-    explicit NormalMap(std::string type);
+  explicit NormalMap(std::string type);
 
-    std::string type;
+  const double minMapVal = 0.0;
 
-    const double minMapVal = 0.0;
+  const double maxMapVal = 1.0;
 
-    const double maxMapVal = 1.0;
+  std::complex<double> z;
+
+  std::complex<double> dC;
+
+ private:
+  std::string type;
 };
-
 
 #endif //C___NORMALMAP_H

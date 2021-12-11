@@ -143,7 +143,7 @@ double normal_map(complex<double> Z, complex<double> dC)
  * Returns:
  *  0 if completed.
  */
-int iterate(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
+void iterate(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
     /** global **/
     unsigned char b; // color
     int i; // iteration
@@ -226,7 +226,6 @@ int iterate(complex<double> c, vector<unsigned char>& row, int iX, int iMax) {
         row[subPixel+1] = b;
         row[subPixel+2] = b;
     }
-    return 0;
 }
 
 /**
