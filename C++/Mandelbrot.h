@@ -17,14 +17,14 @@ class Mandelbrot
  public:
 
   /**
-   * default parametrized constructor
+   * Default parametrized constructor
    * @param width - image width
    * @param height - image height
    */
   Mandelbrot(int width, int height);
 
   /**
-   * minimal parametrized constructor
+   * Minimal parametrized constructor
    * used for calling within pixel loops
    * @param pX - current pixel x
    * @param pY - current pixel y
@@ -33,11 +33,13 @@ class Mandelbrot
    */
   Mandelbrot(int pX, int pY, int width, int height);
 
-  // a few too many parameters to choose right now
-  //Mandelbrot(int pX, int pY, int iterMax, double xMin, double xMax, double yMin, double yMax);
-
   ~Mandelbrot();
 
+  /**
+   * Set current position within image
+   * @param pxIn
+   * @param pyIn
+   */
   void current_pixel(int pxIn, int pyIn);
 
   void set_image(int widthIn, int heightIn);
@@ -50,23 +52,39 @@ class Mandelbrot
 
   void set_border(int thinIn);
 
+  /**
+   * Determine where pixel lies in complex plane
+   */
   void get_c();
 
+  /**
+   * Main Mandelbrot function
+   */
   void iterate();
 
+  /**
+   * @return single output pixel value
+   */
   unsigned char colorize_bw();
 
   /**
-   * Shape checking algorithm - determines if point is within main cardioid or secondary bulb
-   * Removes about 91% of the set from being iterated
+   * Shape checking algorithm - determines if point is within main cardioid or secondary bulb.
+   * Removes about 91% of the set from being iterated.
    * Should not be implemented for a render that does not include these parts, will add unnecessary
    * computing
    * @return TRUE if within the main shapes
    */
   bool shape_check();
 
+  /**
+   * addend function
+   * @return mapped real number t
+   */
   double get_t();
 
+  /**
+   * Removes level sets of escape time
+   */
   void interpolate();
 
   void average();
@@ -104,6 +122,9 @@ class Mandelbrot
 
   double cardioid;
 
+  /**
+   * independent
+   */
   const double bulb = 0.0625;
 
   // coordinate plane
@@ -151,7 +172,6 @@ class Mandelbrot
   int thin;
 
   Shading *shade;
-
 };
 
 #endif //C___MANDELBROT_H

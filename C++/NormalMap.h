@@ -9,8 +9,16 @@ class NormalMap
 {
  public:
 
+  ~NormalMap();
+
   virtual double calculate() = 0;
 
+  /**
+   * Complex number dot product
+   * @param u
+   * @param v
+   * @return
+   */
   double dot_product(std::complex<double> u, std::complex<double> v);
 
   double get_min_val();

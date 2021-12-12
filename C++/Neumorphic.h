@@ -7,6 +7,11 @@ class Neumorphic : public NormalMap
 {
  public:
 
+  /**
+   * Default parametrized constructor
+   * @param z
+   * @param dC
+   */
   Neumorphic(std::complex<double> z, std::complex<double> dC);
 
   double calculate();

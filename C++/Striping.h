@@ -10,6 +10,8 @@ class Striping : public Shading
 
   Striping(double average, std::complex<double> z, std::complex<double> dc);
 
+  ~Striping();
+
   unsigned char calculate_bw();
 
   unsigned char calculate_r();

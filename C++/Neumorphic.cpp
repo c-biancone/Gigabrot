@@ -16,7 +16,7 @@ double Neumorphic::calculate()
   u = z / dC;
   u = u / abs(u); // normalize
   reflection = dot_product(u, v) + heightFactor;
-  reflection = reflection / (1.0 + heightFactor); // rescale so that t does not get bigger than 1
+  reflection = reflection / (1.0 + heightFactor); // rescale so that it does not get bigger than 1
   if (reflection < 0.0)
   {
     reflection = 0.0;

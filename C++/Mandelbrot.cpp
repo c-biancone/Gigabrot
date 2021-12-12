@@ -61,10 +61,6 @@ height(height)
   shade = nullptr; // avoid calling "new" more than once per pixel
 }
 
-//Mandelbrot::Mandelbrot(int iterMax, double xMin, double xMax, double yMin, double yMax) : iterMax
-//(iterMax)
-//{}
-
 Mandelbrot::~Mandelbrot()
 {
   delete shade;

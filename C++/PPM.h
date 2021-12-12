@@ -82,6 +82,9 @@ class PPM
 
  private:
 
+  /**
+   * Determines type of PPM
+   */
   const std::string magic = "P6\n";
 
   const std::string pixMaxVal = "255\n";
@@ -94,6 +97,9 @@ class PPM
 
   std::string comment;
 
+  /**
+   * Contains full header info
+   */
   std::stringstream header;
 
   std::string outputDirectory;

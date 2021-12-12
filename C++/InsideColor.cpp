@@ -3,6 +3,9 @@
 InsideColor::InsideColor() : Shading("Inside")
 {}
 
+InsideColor::~InsideColor()
+= default;
+
 unsigned char InsideColor::calculate_bw()
 {
   return minColorValue;

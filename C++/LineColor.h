@@ -9,6 +9,8 @@ public:
 
     LineColor();
 
+    ~LineColor();
+
     unsigned char calculate_bw();
 
     unsigned char calculate_r();

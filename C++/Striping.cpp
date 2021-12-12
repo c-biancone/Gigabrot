@@ -6,6 +6,9 @@ Striping::Striping(double average, complex<double> z, complex<double> dc) : Shad
 average(average), reflection(z, dc)
 {}
 
+Striping::~Striping()
+= default;
+
 unsigned char Striping::calculate_bw()
 {
   return static_cast<unsigned char>(((maxColorValue - 1) - (100.0 *

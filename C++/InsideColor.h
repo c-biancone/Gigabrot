@@ -9,6 +9,8 @@ class InsideColor : public Shading
 
   InsideColor();
 
+  ~InsideColor();
+
   unsigned char calculate_bw();
 
   unsigned char calculate_r();

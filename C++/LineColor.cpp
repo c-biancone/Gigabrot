@@ -3,6 +3,9 @@
 LineColor::LineColor() : Shading("Line")
 {}
 
+LineColor::~LineColor()
+= default;
+
 unsigned char LineColor::calculate_bw()
 {
   return maxColorValue;

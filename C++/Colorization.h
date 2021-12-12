@@ -6,6 +6,7 @@
 class Colorization
 {
  public:
+
   /**
    * @return type of colorization
    */
@@ -20,6 +21,12 @@ class Colorization
  protected:
 
   /**
+   * Parametrized constructor
+   * @param type of colorization
+   */
+  explicit Colorization(std::string type);
+
+  /**
    * Determines type of colorization
    */
   std::string type;
@@ -28,11 +35,6 @@ class Colorization
 
   const unsigned char minColorValue = 0;
 
-  /**
-   * Parametrized constructor
-   * @param type of colorization
-   */
-  explicit Colorization(std::string type);
 };
 
 #endif  // C___COLORIZATION_H
