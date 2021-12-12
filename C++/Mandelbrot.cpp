@@ -2,6 +2,36 @@
 
 using namespace std;
 
+Mandelbrot::Mandelbrot(int width, int height) : width(width), height(height)
+{
+  pX = 0;
+  pY = 0;
+  iter = 0;
+  iterMax = 1000;
+  escapeRadius = 1000000.0;
+  // lnER = log(escapeRadius);
+  c = 0.0;
+  r = 0.0;
+  z = 0.0;
+  dC = 0.0;
+  q = 0.0;
+  cardioid = 0.0;
+  a = 0.0;
+  prevA = 0.0;
+  stripeDensity = 7.0;
+  d = 0.0;
+  de = 0.0;
+  cxMin = -2.2;
+  cxMax = 0.8;
+  cyMin = -1.5;
+  cyMax = 1.5;
+  pixWidth = 0.0;
+  pixHeight = 0.0;
+  iSkip = 1;
+  thin = 3;
+  shade = nullptr; // avoid calling "new" more than once per pixel
+}
+
 Mandelbrot::Mandelbrot(int pX, int pY, int width, int height) : pX(pX), pY(pY), width(width),
 height(height)
 {
@@ -38,6 +68,41 @@ height(height)
 Mandelbrot::~Mandelbrot()
 {
   delete shade;
+}
+
+void Mandelbrot::set_image(int widthIn, int heightIn)
+{
+  width = widthIn;
+  height = heightIn;
+}
+
+void Mandelbrot::current_pixel(int pxIn, int pyIn)
+{
+  pX = pxIn;
+  pY = pyIn;
+}
+
+void Mandelbrot::set_plane(double cxMinIn, double cxMaxIn, double cyMinIn, double cYMaxIn)
+{
+  cxMin = cxMinIn;
+  cxMax = cxMaxIn;
+  cyMin = cyMinIn;
+  cyMax = cYMaxIn;
+}
+
+void Mandelbrot::set_stripe_density(double stripeDensityIn)
+{
+  stripeDensity = stripeDensityIn;
+}
+
+void Mandelbrot::set_iSkip(int iSkipIn)
+{
+  iSkip = iSkipIn;
+}
+
+void Mandelbrot::set_border(int thinIn)
+{
+  thin = thinIn;
 }
 
 void Mandelbrot::get_c()

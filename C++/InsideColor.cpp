@@ -5,20 +5,20 @@ InsideColor::InsideColor() : Shading("Inside")
 
 unsigned char InsideColor::calculate_bw()
 {
-    return minColorValue;
+  return minColorValue;
 }
 
 unsigned char InsideColor::calculate_r()
 {
-    return minColorValue;
+  return minColorValue;
 }
 
 unsigned char InsideColor::calculate_g()
 {
-    return minColorValue;
+  return minColorValue;
 }
 
 unsigned char InsideColor::calculate_b()
 {
-    return minColorValue;
+  return minColorValue;
 }

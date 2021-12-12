@@ -38,4 +38,3 @@ double Neumorphic::get_angle()
 {
   return angle;
 }
-

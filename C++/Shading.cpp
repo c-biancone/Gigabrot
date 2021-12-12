@@ -5,14 +5,14 @@
 Shading::Shading(std::string type) : Colorization(std::move(type))
 {}
 
-void Shading::set_subtype(std::string subtypeIn)
-{
-    subtype = subtypeIn;
-}
-
 unsigned char Shading::get_max_color_value()
 {
-    return maxColorValue;
+  return maxColorValue;
+}
+
+unsigned char Shading::get_min_color_value()
+{
+  return minColorValue;
 }
 
 Shading::~Shading()

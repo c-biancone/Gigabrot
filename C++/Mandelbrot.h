@@ -16,15 +16,38 @@ class Mandelbrot
  public:
 
   /**
-   * default constructor
-   * @param pX - image width
-   * @param pY - image height
+   * default parametrized constructor
+   * @param width - image width
+   * @param height - image height
+   */
+  Mandelbrot(int width, int height);
+
+  /**
+   * minimal parametrized constructor
+   * used for calling within pixel loops
+   * @param pX - current pixel x
+   * @param pY - current pixel y
+   * @param width - image width
+   * @param height - image height
    */
   Mandelbrot(int pX, int pY, int width, int height);
 
+  // a few too many parameters to choose right now
   //Mandelbrot(int pX, int pY, int iterMax, double xMin, double xMax, double yMin, double yMax);
 
   ~Mandelbrot();
+
+  void current_pixel(int pxIn, int pyIn);
+
+  void set_image(int widthIn, int heightIn);
+
+  void set_plane(double cxMinIn, double cxMaxIn, double cyMinIn, double cYMaxIn);
+
+  void set_stripe_density(double stripeDensityIn);
+
+  void set_iSkip(int iSkipIn);
+
+  void set_border(int thinIn);
 
   void get_c();
 
