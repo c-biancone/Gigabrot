@@ -13,6 +13,10 @@ class Neumorphic : public NormalMap
 
   double get_reflection();
 
+  double get_heightFactor();
+
+  double get_angle();
+
  private:
 
   std::complex<double> z;
