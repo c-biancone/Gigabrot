@@ -20,20 +20,27 @@ class Neumorphic : public NormalMap
   std::complex<double> dC;
 
   /**
-   * height factor of incoming light
+   * of pseudo incoming light vector
    */
-  double h2 = 1.5;
+  double heightFactor;
 
   /**
    * incoming direction of light WRT +x-axis (degrees)
    * change first number
    */
-  double angle = 45.0 / 360.0;
+  double angle;
 
   /**
    * normalized normal vector
    */
   double reflection;
+
+  std::complex<double> u;
+
+  /**
+   * unit vector in direction of this.angle
+   */
+  std::complex<double> v;
 
 };
 
