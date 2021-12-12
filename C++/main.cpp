@@ -1,4 +1,4 @@
-#include "PGM.h"
+#include "PPM.h"
 #include "Colorization.h"
 #include "Shading.h"
 #include "InsideColor.h"
@@ -33,7 +33,7 @@ const double CyMax = 1.5;
 double pixelWidth; //=(CxMax-CxMin)/pXmax;
 double pixelHeight; // =(CyMax-CyMin)/pYmax;
 const int maxColorValue = 255; // rgb - SDR colorspace (8 bits per color)
-string fileName = "..\\..\\output\\mandelbrot.ppm";
+string fileName = "gigabrot_testing.ppm";
 /**************************************************************************************************/
 
 /************************************* render parameters ******************************************/
@@ -275,7 +275,7 @@ int main() {
     auto begin = chrono::steady_clock::now();
 
     // set up image stream for writing
-    PGM pgm(fileName, width, height);
+    PPM pgm(fileName, width, height);
     if (!pgm.init_stream())
     {
         cout << "Could not open ofstream for image";
