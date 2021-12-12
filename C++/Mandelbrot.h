@@ -8,6 +8,7 @@
 #include <cmath>
 #include <complex>
 #include <algorithm>
+#include <iostream>
 
 #define M_PI 3.14159265358979323846
 
@@ -75,6 +76,10 @@ class Mandelbrot
   bool in_border();
 
   bool in_set(); // for readability
+
+  void check_distortion();
+
+  void reset();
 
 
  private:

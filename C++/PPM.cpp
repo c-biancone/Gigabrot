@@ -7,58 +7,60 @@ using namespace std;
 PPM::PPM(int width, int height) : width(width), height(height)
 {
   outputDirectory = "..\\..\\output\\";
-  fileName = outputDirectory + "gigabrot_default.pgm";
+  fileName = outputDirectory + "gigabrot_default.ppm";
   subPixel = width * 3;
 }
 
-PPM::PPM(const std::string& fileName, int width, int height) : width(width), height(height)
+PPM::PPM(const std::string &fileName, int width, int height) : width(width), height(height)
 {
   outputDirectory = "..\\..\\output\\";
   this->fileName = outputDirectory + fileName;
   subPixel = width * 3;
 }
 
-void PPM::set_filename(const std::string& fileNameIn)
+void PPM::set_filename(const std::string &fileNameIn)
 {
   fileName = outputDirectory + fileNameIn;
 }
 
 bool PPM::init_stream()
 {
-    image.open(fileName, ios::binary);
+  image.open(fileName, ios::binary);
 
-    if (image.is_open())
-    {
-        return true;
-    } else {
-        return false;
-    }
+  if (image.is_open())
+  {
+    return true;
+  } else
+  {
+    return false;
+  }
 }
 
 void PPM::write_header()
 {
-    string widthStr = to_string(this->width);
-    string lengthStr = to_string(this->height);
-    header << magic << widthStr << " " << lengthStr << "\n" << comment << "\n" << pixMaxVal;
-    image << header.rdbuf();
+  string widthStr = to_string(this->width);
+  string lengthStr = to_string(this->height);
+  header << magic << widthStr << " " << lengthStr << "\n" << comment << "\n" << pixMaxVal;
+  image << header.rdbuf();
 }
 
 void PPM::set_width(int widthIn)
 {
-    width = widthIn;
+  width = widthIn;
 }
 
 void PPM::set_height(int heightIn)
 {
-    height = heightIn;
+  height = heightIn;
 }
 
 void PPM::set_comment(string commentIn)
 {
-    comment = std::move(commentIn);
+  comment = std::move(commentIn);
 }
 
 void PPM::close()
 {
-    image.close();
+  image.close();
+  cout << "File " << fileName << " saved\n";
 }
