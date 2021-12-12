@@ -95,7 +95,7 @@ class Mandelbrot
 
   bool in_set(); // for readability
 
-  void check_distortion();
+  friend std::ostream& operator<<(std::ostream& os, const Mandelbrot& mandelbrot);
 
   void reset();
 

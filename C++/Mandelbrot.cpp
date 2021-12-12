@@ -227,12 +227,14 @@ bool Mandelbrot::in_set()
   }
 }
 
-void Mandelbrot::check_distortion()
+std::ostream &operator<<(ostream &os, const Mandelbrot& mandelbrot)
 {
-  double pixAspectRatio = (static_cast<double>(width) / static_cast<double>(height));
-  double worldAspectRatio = (cxMax - cxMin) / (cyMax - cyMin);
+  double pixAspectRatio = (static_cast<double>(mandelbrot.width) / static_cast<double>(mandelbrot
+      .height));
+  double worldAspectRatio = (mandelbrot.cxMax - mandelbrot.cxMin) / (mandelbrot.cyMax -
+      mandelbrot.cyMin);
   double distortion = pixAspectRatio - worldAspectRatio;
-  cout << "Distortion (should be 0): " << distortion << "\n";
+  os << "Distortion (should be 0): " << distortion << "\n";
 }
 
 void Mandelbrot::reset()
@@ -248,3 +250,5 @@ void Mandelbrot::reset()
   d = 0.0;
   shade = nullptr; // avoid calling "new" more than once per pixel
 }
+
+

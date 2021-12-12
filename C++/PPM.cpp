@@ -18,9 +18,19 @@ PPM::PPM(const std::string &fileName, int width, int height) : width(width), hei
   subPixel = width * 3;
 }
 
-void PPM::set_filename(const std::string &fileNameIn)
+PPM::PPM(const PPM& oldPPM) : magic(oldPPM.magic), pixMaxVal(oldPPM.pixMaxVal),
+    width(oldPPM.width), height(oldPPM.height), subPixel(oldPPM.subPixel), comment(oldPPM.comment)
+{}
+
+void PPM::set_outputDirectory(const std::string &outputDirectoryIn)
 {
-  fileName = outputDirectory + fileNameIn;
+  outputDirectory = outputDirectoryIn;
+}
+
+PPM& PPM::operator=(string fileNameIn)
+{
+  this->fileName = std::move(fileNameIn);
+  return *this;
 }
 
 bool PPM::init_stream()

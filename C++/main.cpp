@@ -18,14 +18,14 @@ int main()
   cin >> width >> height;
 
   string fileName;
-  // cout << "Enter output file name in the form 'name.ppm':\n";
-  // cin >> fileName;
+  cout << "Enter output file name in the form 'name.ppm':\n";
+  cin >> fileName;
 
   auto begin = chrono::steady_clock::now();
 
   // set up image stream for writing
-  // PPM pgm(fileName, width, height);
-  PPM pgm(width, height); // for testing
+  PPM pgm(fileName, width, height);
+  // PPM pgm(width, height); // for testing
   if (!pgm.init_stream())
   {
     cout << "Could not open ofstream for image\n";
@@ -39,7 +39,7 @@ int main()
   cout << "Rendering row by row:\n";
 
   Mandelbrot gigabrot(width, height);
-  gigabrot.check_distortion();
+  cout << gigabrot;
 
   for (int pY = 0; pY < height; pY++)
   {

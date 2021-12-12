@@ -5,6 +5,9 @@ using namespace std;
 NormalMap::NormalMap(string type)
 {}
 
+NormalMap::~NormalMap()
+= default;
+
 double NormalMap::dot_product(std::complex<double> u, std::complex<double> v)
 {
   return real(u) * real(v) + imag(u) * imag(v);

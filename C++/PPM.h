@@ -30,10 +30,23 @@ class PPM
   PPM(const std::string& fileName, int width, int height);
 
   /**
-   * Appends file name to "output" directory destination
+   * Copy constructor
+   * @param oldPPM - dereferenced old object
+   */
+  PPM(const PPM& oldPPM);
+
+  /**
+   * Sets output directory destination
    * @param fileNameIn
    */
-  void set_filename(const std::string& fileNameIn);
+  void set_outputDirectory(const std::string& outputDirectoryIn);
+
+  /**
+   * Overloaded assignment operator used to override output directory and file name
+   * @param fileNameIn
+   * @return
+   */
+  PPM& operator=(std::string fileNameIn);
 
   /**
    * Initialize ofstream
@@ -79,6 +92,7 @@ class PPM
    * Close ofstream for image
    */
   void close();
+
 
  private:
 
