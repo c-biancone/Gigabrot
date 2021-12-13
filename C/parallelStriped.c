@@ -25,7 +25,7 @@ double pixelWidth; //=(CxMax-CxMin)/pXmax;
 double pixelHeight; // =(CyMax-CyMin)/pYmax;
 const int maxColorComponentValue = 255; // rgb - SDR colorspace (8 bits per color)
 FILE * fp;
-char * filename = "..\\..\\output\\mandelbrot.ppm";
+char * filename = "..\\..\\output\\mandelbrotC.ppm";
 // char * comment = "# "; // comment should start with #
 /**************************************************************************************************/
 
@@ -278,7 +278,7 @@ int main() {
 
     for (pY = 0; pY < pYmax; pY++)
     {
-#pragma omp parallel for schedule(dynamic)
+//#pragma omp parallel for schedule(dynamic)
         for (pX = 0; pX < pXmax; pX++)
         {
             // compute pixel coordinate

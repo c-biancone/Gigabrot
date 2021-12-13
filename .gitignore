@@ -1,3 +1,7 @@
+################################****************************
+# EXCLUDING DIRECTORY TO CREATE SEPARATE REPO FOR SUBMISSION
+/C++/
+
 ### C++ template
 # Compiled Object files
 *.slo
