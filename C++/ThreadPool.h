@@ -10,6 +10,9 @@
 #include <atomic>
 #include <future>
 
+/**
+ * Only using C++ intrinsics
+ */
 class ThreadPool
 {
  public:

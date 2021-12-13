@@ -43,32 +43,26 @@ int main()
 
   unsigned int numThreads = thread::hardware_concurrency();
   // cout << "numThreads: " << numThreads << "\n";
-  ThreadPool pool(numThreads);
-
-  for (size_t pZ = 0; pZ < height; pZ++)
+  for (size_t pY = 0; pY < height; pY++)
   {
-    pool.enqueue_work( [&width, &row, &height] ()
-                       {
-                        for (size_t pY = 0; pY < height; pY++)
-                        {
-                          //mutex mtx;
-                          //scoped_lock guard(mtx);
-                          for (size_t pX = 0; pX < width; pX++)
-                          {
-                            Mandelbrot newBrot(width, height);
-                            size_t subPixel = 3 * pX;
-                            newBrot.current_pixel(pX, pY);
-                            newBrot.get_c();
-                            newBrot.iterate();
-                            row[subPixel + 2] = row[subPixel + 1] = row[subPixel] =
-                                newBrot.colorize_bw();
-                            newBrot.reset();
-                          }
-                        }
-
-                       });
-    // implemented due to possibility of having huge image
-    pgm.write_row(row);
+    //mutex mtx;
+    //scoped_lock guard(mtx);
+// #pragma omp parallel for schedule(dynamic)
+    for (size_t pX = 0; pX < width; pX++)
+    {
+      //Mandelbrot newBrot(width, height);
+      size_t subPixel = 3 * pX;
+      gigabrot.current_pixel(pX, pY);
+      gigabrot.get_c();
+      gigabrot.iterate();
+      row[subPixel + 2] = row[subPixel + 1] = row[subPixel] =
+          gigabrot.colorize_bw();
+      gigabrot.reset();
+    }
+    {
+      // implemented due to possibility of having huge image, keep memory usage low
+      pgm.write_row(row);
+    }
   }
 
   pgm.close();

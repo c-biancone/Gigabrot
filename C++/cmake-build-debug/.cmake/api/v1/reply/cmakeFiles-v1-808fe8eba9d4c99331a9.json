@@ -134,6 +134,26 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "/cygdrive/c/Users/Chris/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/share/cmake-3.21.1/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/cygdrive/c/Users/Chris/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/share/cmake-3.21.1/Modules/FindOpenMP.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/cygdrive/c/Users/Chris/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/share/cmake-3.21.1/Modules/CMakeParseImplicitLinkInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/cygdrive/c/Users/Chris/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/share/cmake-3.21.1/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/cygdrive/c/Users/Chris/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/share/cmake-3.21.1/Modules/FindPackageMessage.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
