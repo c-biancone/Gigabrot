@@ -11,7 +11,7 @@ Striping::~Striping()
 
 unsigned char Striping::calculate_bw()
 {
-  return static_cast<unsigned char>(((maxColorValue - 1) - (100.0 *
+  return static_cast<unsigned char>((static_cast<double>((maxColorValue - 1)) - (100.0 *
   average)) * reflection.calculate()); // explicit casting
 }
 

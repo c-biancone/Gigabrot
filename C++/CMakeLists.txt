@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-add_compile_options(-v -da -Q -O1 -std=c++17 -lstdc++)
+add_compile_options(-Ofast -std=c++17 -lstdc++)
 
 find_package(OpenMP)
 if (OPENMP_FOUND)

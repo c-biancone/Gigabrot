@@ -103,9 +103,9 @@ void Mandelbrot::set_border(int thinIn)
 
 void Mandelbrot::get_c()
 {
-  pixWidth = (cxMax-cxMin) / width;
-  pixHeight = (cyMax-cyMin) / height;
-  c = (cxMin + pX * pixWidth) + ((cyMax - pY * pixHeight) * 1i);
+  pixWidth = (cxMax-cxMin) / static_cast<double>(width);
+  pixHeight = (cyMax-cyMin) / static_cast<double>(height);
+  c = (cxMin + static_cast<double>(pX) * pixWidth) + ((cyMax - static_cast<double>(pY) * pixHeight) * 1i);
 }
 
 void Mandelbrot::iterate()
@@ -179,8 +179,9 @@ double Mandelbrot::get_t()
 void Mandelbrot::interpolate()
 {
   // smooth iteration count
-  d = iter + 1 + log(log(escapeRadius) / log(r)) / M_LN2;
-  d = d - (int) d; // only fractional part = interpolation coefficient
+  d = static_cast<double>(iter + 1) + log(log(escapeRadius) / log(r)) / M_LN2;
+  d = d - static_cast<double>(static_cast<int>(d)); // only fractional part = interpolation
+  // coefficient
 }
 
 void Mandelbrot::average()
@@ -194,8 +195,8 @@ void Mandelbrot::average()
     {
       a = FP_ZERO;
     } else {
-      a /= (iter - iSkip); // A(n)
-      prevA /= (iter - iSkip - 1); // A(n-1)
+      a /= static_cast<double>((iter - iSkip)); // A(n)
+      prevA /= static_cast<double>((iter - iSkip - 1)); // A(n-1)
       this->interpolate();
       a = (d * a) + ((1.0 - d) * prevA);
     }
@@ -209,7 +210,7 @@ void Mandelbrot::describe_border()
 
 bool Mandelbrot::in_border()
 {
-  if (de < (pixWidth / thin))
+  if (de < (pixWidth / static_cast<double>(thin)))
   {
     return true;
   } else {

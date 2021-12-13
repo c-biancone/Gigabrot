@@ -43,16 +43,13 @@ int main()
   cout << gigabrot;
   cout.flush();
 
-  unsigned int numThreads = thread::hardware_concurrency();
+  // unsigned int numThreads = thread::hardware_concurrency();
   // cout << "numThreads: " << numThreads << "\n";
+
   for (size_t pY = 0; pY < height; pY++)
   {
-    //mutex mtx;
-    //scoped_lock guard(mtx);
-// #pragma omp parallel for schedule(dynamic)
     for (size_t pX = 0; pX < width; pX++)
     {
-      //Mandelbrot newBrot(width, height);
       size_t subPixel = 3 * pX;
       gigabrot.current_pixel(pX, pY);
       gigabrot.get_c();
@@ -63,6 +60,8 @@ int main()
     }
     {
       // implemented due to possibility of having huge image, keep memory usage low
+      // might be causing the issues with parallelization, ruining the embarrassingly parallel
+      // aspect of the Mandelbrot set
       pgm.write_row(row);
     }
   }
@@ -70,8 +69,8 @@ int main()
   pgm.close();
 
   auto end = chrono::steady_clock::now();
-  cout << "Time elapsed:"
-       << chrono::duration_cast<chrono::seconds>(end - begin).count()
+  cout << "Time elapsed: "
+       << static_cast<float>(chrono::duration_cast<chrono::milliseconds>(end - begin).count()) / 1000.F
        << " sec\n";
   return 0;
 }
