@@ -251,4 +251,8 @@ void Mandelbrot::reset()
   shade = nullptr; // avoid calling "new" more than once per pixel
 }
 
+Mandelbrot::Mandelbrot(const Mandelbrot &oldMandelbrot) : Mandelbrot(oldMandelbrot.width,
+                                                                     oldMandelbrot.height)
+{}
+
 

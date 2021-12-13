@@ -1,8 +1,8 @@
 #include "PPM.h"
 #include "Colorization.h"
 #include "Mandelbrot.h"
+#include "ThreadPool.h"
 
-#include <complex>
 #include <chrono>
 #include <iostream>
 #include <vector>
@@ -41,20 +41,32 @@ int main()
   Mandelbrot gigabrot(width, height);
   cout << gigabrot;
 
-  for (int pY = 0; pY < height; pY++)
-  {
-    for (int pX = 0; pX < width; pX++)
-    {
-      gigabrot.current_pixel(pX, pY);
-      gigabrot.get_c();
-      gigabrot.iterate();
-      unsigned char tmp = gigabrot.colorize_bw();
-      row[3 * pX] = tmp;
-      row[3 * pX + 1] = tmp;
-      row[3 * pX + 2] = tmp;
-      gigabrot.reset();
-    }
+  unsigned int numThreads = thread::hardware_concurrency();
+  // cout << "numThreads: " << numThreads << "\n";
+  ThreadPool pool(numThreads);
 
+  for (size_t pZ = 0; pZ < height; pZ++)
+  {
+    pool.enqueue_work( [&width, &row, &height] ()
+                       {
+                        for (size_t pY = 0; pY < height; pY++)
+                        {
+                          //mutex mtx;
+                          //scoped_lock guard(mtx);
+                          for (size_t pX = 0; pX < width; pX++)
+                          {
+                            Mandelbrot newBrot(width, height);
+                            size_t subPixel = 3 * pX;
+                            newBrot.current_pixel(pX, pY);
+                            newBrot.get_c();
+                            newBrot.iterate();
+                            row[subPixel + 2] = row[subPixel + 1] = row[subPixel] =
+                                newBrot.colorize_bw();
+                            newBrot.reset();
+                          }
+                        }
+
+                       });
     // implemented due to possibility of having huge image
     pgm.write_row(row);
   }

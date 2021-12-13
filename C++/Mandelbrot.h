@@ -9,6 +9,7 @@
 #include <complex>
 #include <algorithm>
 #include <iostream>
+#include <mutex>
 
 #define M_PI 3.14159265358979323846
 
@@ -32,6 +33,8 @@ class Mandelbrot
    * @param height - image height
    */
   Mandelbrot(int pX, int pY, int width, int height);
+
+  Mandelbrot(const Mandelbrot &oldMandelbrot);
 
   ~Mandelbrot();
 
