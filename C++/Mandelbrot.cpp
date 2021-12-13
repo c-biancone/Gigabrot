@@ -235,6 +235,7 @@ std::ostream &operator<<(ostream &os, const Mandelbrot& mandelbrot)
       mandelbrot.cyMin);
   double distortion = pixAspectRatio - worldAspectRatio;
   os << "Distortion (should be 0): " << distortion << "\n";
+  return os;
 }
 
 void Mandelbrot::reset()

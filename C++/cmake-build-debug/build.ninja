@@ -63,67 +63,67 @@ build cmake_object_order_depends_target_C__: phony || CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/main.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/main.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/main.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/PPM.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/PPM.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/PPM.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/Mandelbrot.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/Mandelbrot.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/Mandelbrot.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/Colorization.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/Colorization.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/Colorization.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/Shading.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/Shading.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/Shading.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/InsideColor.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/InsideColor.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/InsideColor.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/LineColor.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/LineColor.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/LineColor.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/Striping.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/Striping.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/Striping.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/NormalMap.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/NormalMap.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/NormalMap.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/Neumorphic.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/Neumorphic.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/Neumorphic.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 
 build CMakeFiles/C__.dir/ThreadPool.cpp.o: CXX_COMPILER__C___Debug /cygdrive/d/Documents/Mandelbrot_Project/Gigabrot/C++/ThreadPool.cpp || cmake_object_order_depends_target_C__
   DEP_FILE = CMakeFiles/C__.dir/ThreadPool.cpp.o.d
-  FLAGS = -fopenmp -g -std=c++17 -march=native -lstdc++ -std=gnu++17
+  FLAGS = -fopenmp -g -v -da -Q -O1 -std=c++17 -lstdc++ -std=gnu++17
   OBJECT_DIR = CMakeFiles/C__.dir
   OBJECT_FILE_DIR = CMakeFiles/C__.dir
 

@@ -39,7 +39,9 @@ int main()
   cout << "Rendering row by row:\n";
 
   Mandelbrot gigabrot(width, height);
+  cout.flush();
   cout << gigabrot;
+  cout.flush();
 
   unsigned int numThreads = thread::hardware_concurrency();
   // cout << "numThreads: " << numThreads << "\n";

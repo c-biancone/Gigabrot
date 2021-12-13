@@ -3,7 +3,9 @@ project(C__)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_compile_options(-std=c++17 -march=native -lstdc++)
+set(CMAKE_BUILD_TYPE Debug)
+
+add_compile_options(-v -da -Q -O1 -std=c++17 -lstdc++)
 
 find_package(OpenMP)
 if (OPENMP_FOUND)
@@ -14,8 +16,28 @@ endif()
 
 add_executable(C__
         #executables
-        main.cpp
-        #ThreadPoolTest.cpp
+            main.cpp
+            #ThreadPoolTest.cpp
 
         #headers
-        PPM.cpp PPM.h Mandelbrot.cpp Colorization.cpp Colorization.h Shading.cpp Shading.h InsideColor.cpp InsideColor.h LineColor.cpp LineColor.h Striping.cpp Striping.h NormalMap.cpp NormalMap.h Neumorphic.cpp Neumorphic.h ThreadPool.cpp ThreadPool.h UnboundedQueue.h)
+            PPM.cpp
+            PPM.h
+            Mandelbrot.cpp
+            Colorization.cpp
+            Colorization.h
+            Shading.cpp
+            Shading.h
+            InsideColor.cpp
+            InsideColor.h
+            LineColor.cpp
+            LineColor.h
+            Striping.cpp
+            Striping.h
+            NormalMap.cpp
+            NormalMap.h
+            Neumorphic.cpp
+            Neumorphic.h
+            ThreadPool.cpp
+            ThreadPool.h
+            UnboundedQueue.h
+        )
